@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+/* font-family: 'Noto Sans KR', sans-serif; */
+
+@font-face {
+    font-family: 'GT Walsheim Pro Light';
+    src: url('./GTWalsheimPro/GTWalsheimPro-Light.woff2') format('woff2'),
+        url('./GTWalsheimPro/GTWalsheimPro-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GT Walsheim Pro Regular';
+    src: url('./GTWalsheimPro/GTWalsheimPro-Regular.woff2') format('woff2'),
+        url('./GTWalsheimPro/GTWalsheimPro-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GT Walsheim Pro Medium';
+    src: url('./GTWalsheimPro/GTWalsheimPro-Medium.woff2') format('woff2'),
+        url('./GTWalsheimPro/GTWalsheimPro-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GT Walsheim Pro Bold';
+    src: url('./GTWalsheimPro/GTWalsheimPro-Bold.woff2') format('woff2'),
+        url('./GTWalsheimPro/GTWalsheimPro-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GT Walsheim Pro Ultra';
+    src: url('./GTWalsheimPro/GTWalsheimPro-UltraBold.woff2') format('woff2'),
+        url('./GTWalsheimPro/GTWalsheimPro-UltraBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GT Walsheim Pro Black';
+    src: url('./GTWalsheimPro/GTWalsheimPro-Black.woff2') format('woff2'),
+        url('./GTWalsheimPro/GTWalsheimPro-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Recoleta Regular';
+    src: url('./Recoleta/Recoleta-Regular.woff2') format('woff2'),
+        url('./Recoleta/Recoleta-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Recoleta Medium';
+    src: url('./Recoleta/Recoleta-Medium.woff2') format('woff2'),
+        url('./Recoleta/Recoleta-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Recoleta Bold';
+    src: url('./Recoleta/Recoleta-Bold.woff2') format('woff2'),
+        url('./Recoleta/Recoleta-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+@font-face {
+    font-family: 'Recoleta SemiBold';
+    src: url('./Recoleta/Recoleta-SemiBold.woff2') format('woff2'),
+        url('./Recoleta/Recoleta-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}

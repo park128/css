@@ -1,0 +1,342 @@
+body {
+    background-color: #6a2f2f;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 2rem;
+}
+.white{
+    font:lialic bold 1.5em/1em Georgin, serif; color: white;
+}
+
+.header-time{
+    top: 53px;
+    left: 104px;
+    position: fixed;
+    display: inline-block;
+    font:lialic bold 1.5em/1em Georgin, serif; color: white;
+}
+
+.header-logo{
+    font-size: 25px;
+    top: 40px;
+    right: 45%;
+    position: fixed;
+    text-align: center;
+    display: inline-block;
+    font:lialic bold 1.5em/1em Georgin, serif; color: white;
+}
+
+
+.close{
+    font-size: 10px;
+    background-color: #6a2f2f;
+    color: white;
+    border: 1px solid white;
+    border-radius: 50px;
+    display: inline-block;
+    position: fixed;
+    top: 39px;
+    right: 32px;
+    height: 41px;
+    width: 130px; 
+}
+
+*{
+    box-sizing: border-box;
+}
+
+/*---------------------------------menu-------------------------------------  */
+.top_menu{
+    background-color: #6a2f2f;
+    display: inline-block;
+    position: fixed;
+    top: 50px;
+    right: 82px;
+    height: 20px;
+    width: 65px; 
+}
+
+.aaa{
+
+    border-bottom: solid white 2px;
+    overflow: hidden;
+    width: 1250px; 
+    height: 800px;
+}
+.menu {
+    font-size: 17px;
+}
+
+/* ----------------------------------------------------------------------------- */
+li{
+    list-style: none;
+}
+
+.hamburger input[type="checkbox"]{
+    width: 130px;
+    height: 50px;
+    position: absolute;
+    top: -6px;
+    left: -8px;
+    display:block ;
+    z-index: 3;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.hamburgerlines{
+    width: 30px;
+    height: 20px;
+    position: absolute;
+    top: 11px;
+    left: 70px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hamburgerlines .lines{
+    display: block;
+    height: 4px;
+    width: 90%;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.hamburger{
+    position: relative;
+}
+
+.menu-items{
+    padding-top: 100px;
+    transform: translate(150%);
+    transition: transform 0.5s ease-in-out;
+    padding-left: 15px;
+    background: #6a2f2f;
+    margin-top: -2px;
+    color: #fff;
+    padding-bottom: 1rem;
+    max-width: 400px;
+    width: 100%;
+    height: 100vh;
+    overflow: scroll;
+}
+
+.menu-items li{
+    margin-bottom: 2rem;
+    margin-right: 2.5rem;
+    font-size: 1rem;
+}
+
+.hamburger input[type="checkbox"]:checked ~ .menu-items{
+    display: block;
+    transform: translate(55%);
+    background: #232323;
+    
+}
+
+.hamburger input[type="checkbox"]:checked ~ .hamburgerlines .lines{
+    background: #fff;
+}
+
+.hamburgerlines .line1{
+    transform-origin: 0% 0%;
+    transition: transform 0.3s ease-in-out;    
+}
+
+.hamburgerlines .line3{ 
+    transform-origin: 0% 100%;
+    transition: transform 0.3s ease-in-out;  
+}
+
+.hamburger input[type="checkbox"]:checked ~ .hamburgerlines .line1{
+    transform: rotate(45deg);
+}
+
+.hamburger input[type="checkbox"]:checked ~ .hamburgerlines .line2{
+    display: none;
+}
+
+
+.hamburger input[type="checkbox"]:checked ~ .hamburgerlines .line3{
+    transform: rotate(-45deg);
+}
+
+
+/* //여기 이름 바꿔야함// */
+
+.top_main1 {
+    width: 900px; 
+    height: 680px; 
+    margin: 0 auto; 
+    margin-top: 10px;
+}
+
+
+
+/* 여기까지 */
+
+
+table {
+    width: 1000px;
+    text-align: center;
+    border: 1px solid #fff;
+    border-spacing: 1px;
+    font-family: 'Cairo', sans-serif;
+    margin: auto;
+}
+
+caption {
+    font-weight: bold;
+}
+
+table td {
+    padding: 10px;
+    background-color: #eee;
+}
+
+table th {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+img {
+    width: 90px;
+    height: 90px;
+}
+
+.view,
+.delete {
+    border: none;
+    padding: 5px 10px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.view {
+    background-color: #03A9F4;
+}
+
+.delete {
+    background-color: #E91E63;
+}
+
+.tablefoot {
+    padding: 0;
+    border-bottom: 3px solid #009688;
+}
+
+
+/*  좋아요 css */
+
+.like-content {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 40px; 
+    font-size: 18px;
+    border-top: 10px dashed #eee;
+    text-align: center;
+}
+
+.like-content span {
+color: #9d9da4;
+font-family: monospace;
+}
+
+.like-content .btn-secondary {
+    display: block;
+    margin: 40px auto 0px;
+    text-align: center;
+    background: #ed2553;
+    border-radius: 3px;
+    box-shadow: 0 10px 20px -8px rgb(240, 75, 113);
+    padding: 10px 17px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    text-decoration: none;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
+}
+
+.like-content .btn-secondary:hover {
+    transform: translateY(-3px);
+}
+
+.like-content .btn-secondary .fa {
+    margin-right: 5px;
+}
+
+.animate-like {
+    animation-name: likeAnimation;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.65s;
+}
+
+@keyframes likeAnimation {
+    0%   { transform: scale(30); }
+    100% { transform: scale(1); }
+}
+
+/* 아이콘 연결 css */
+
+.social-menu ul{
+    position: fixed;
+    bottom: 2%;
+    left: 50%;
+    padding: 0;
+    margin: 0;
+    transform: translate(-50%, -50%);
+    display: flex;
+}
+
+.social-menu ul li{
+    list-style: none;
+    margin: 0 15px;
+}
+
+.social-menu ul li .fab{
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+    line-height: 60px;
+    transition: .3s;
+    color: #000;
+}
+
+.social-menu ul li .fab:hover{
+    color: #fff;
+}
+
+.social-menu ul li a{
+    position: relative;
+    display: block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #fff;
+    text-align: center;
+    transition: .6s;
+    box-shadow: 0 5px 4px rgba(0,0,0,.5);
+}
+
+.social-menu ul li a:hover{
+    transform: translate(0, -20%);
+}
+
+.social-menu ul li:nth-child(1) a:hover{
+    background-color: rgba(0, 0, 0, 0.829);
+}
+.social-menu ul li:nth-child(2) a:hover{
+    background-color: #E4405F;
+}
+.social-menu ul li:nth-child(3) a:hover{
+    background-color: #0077b5;
+}
+.social-menu ul li:nth-child(4) a:hover{
+    background-color: violet;
+}
