@@ -24,13 +24,11 @@ li{
 }
 
 .header-logo{
-    font-size: 25px;
     top: 40px;
-    right: 45%;
+    right: 46.5%;
     position: fixed;
     text-align: center;
     display: inline-block;
-    font:lialic bold 1.5em/1em Georgin, serif; color: white;
 }
 
 
