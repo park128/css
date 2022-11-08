@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.study.domain.register.RegisterMapper">
+
+  <!-- tb_user 테이블 전체 컬럼 -->
+    <sql id="registerColumns">
+         user_id
+        , user_pw
+        , user_name
+        , user_auth
+        , append_date
+        , update_date
+    </sql>
+    
+    
+    <!-- 회원정보 저장 -->
+    <insert id="register" parameterType="com.study.domain.register.RegisterRequest" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO tb_user1 (
+            <include refid="registerColumns" />
+        ) VALUES (
+             #{userId}
+            , #{userPw}
+            , #{userName}
+            , 0
+            , NOW()
+            , NULL
+        )
+    </insert>
+
+	
+    <!-- 회원정보 조회 -->
+    <select id="findByuserno" parameterType="Integer" resultType="com.study.domain.register.RegisterResponse">
+        SELECT
+            <include refid="registerColumns" />
+        FROM
+            tb_user1
+        WHERE
+            user_id=#{value}
+    </select>
+    
+    <!-- 로그인 -->
+    <select id="login"  resultType="Integer">
+        SELECT 
+        	COUNT(*)
+        FROM
+            tb_user1
+        WHERE
+            user_id=#{userId}
+        AND
+        	user_pw= #{userPw}
+    </select>
+    
+
+    
+
+    <select id="testit"  resultType="com.study.domain.register.RegisterResponse">
+        SELECT 
+        	<include refid="registerColumns" />
+        FROM
+            tb_user1
+        WHERE
+            user_id=#{userId}
+        AND
+        	user_pw= #{userPw}
+    </select>
+    
+    <!-- 아이디 중복 조회 -->
+    <select id="idconfig" resultType="Integer">
+    	SELECT
+    		count(*)
+    	FROM
+    		tb_user1
+    	WHERE
+    		user_id=#{userId}  
+    </select>
+    
+    <!-- 회원 삭제-->
+    <!-- insert,update,delete는 자동으로 int 타입의 값을 반환해준다. -->
+    <delete id="delete">
+    	DELETE 
+    	FROM
+    		tb_user1
+    	WHERE
+    		user_id=#{userId}
+    		AND
+    		user_pw= #{userPw} 
+    </delete>
+    
+    
+    <!-- 아이디랑 비밀번호가 매칭되는지 확인하는 용도-->
+    <select id="bothconfig"  resultType="Integer">
+        SELECT 
+        	COUNT(*)
+        FROM
+            tb_user1
+        WHERE
+            user_id=#{userId}
+        AND
+        	user_pw= #{userPw}
+    </select>
+    
+    
+    
+    <!-- 게시글 수정 -->
+    <update id="changename" >
+        UPDATE tb_user1
+        SET
+            user_name=#{userName}
+        WHERE
+            user_id=#{userId}
+    </update>
+    
+    
+
+
+ 
+
+
+
+
+</mapper>

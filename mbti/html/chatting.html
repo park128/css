@@ -4,12 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/mbti/css/chatting.css">
-    <link rel="stylesheet" href="/mbti/css/chatting_a.css">
-    <script src="/mbti/js/chatting.js"></script>
-    <script src="./js/animation.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="../css/chatting/chatting.css">
+    <link rel="stylesheet" href="../css/chatting/chatting_a.css">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <title>채팅방</title>
@@ -50,11 +46,11 @@
     </div>
     
     <div class="header">
-        <div class="header-time">
-            2022-10-28 | 10:30
+        <div id="header-time">
+            
         </div>
         <div class="header-logo">
-            <a><img src="/mbti/img/KakaoTalk_20221102_003617932.png" alt=""></a>
+            <img src="../img/KakaoTalk_20221102_003617932.png" alt="Logo" width="100px" height="80px">
         </div>
         <button class="close">
             <div class="top_menu">
@@ -78,7 +74,7 @@
                     <li>MBTI 검사</li>
                     <li>쇼핑몰</li>
                     <li>내 게시물</li>
-                    <li><a href="/mbti/html/login.html">Log Out</a></li>
+                    <li><a href="#" onclick="location.href='../html/login.html'">Log Out</a></li>
                     </ul>
                 </div>
         </button>
@@ -87,12 +83,15 @@
 
     <div class="social-menu">
         <ul>
-            <li><a href="/mbti/html/main.html" target="blank"><i></i></a></li>
-            <li><a href="/mbti/html/main.html" target="blank"><i></i></a></li>
-            <li><a href="/mbti/html/main.html" target="blank"><i></i></a></li>
-            <li><a href="/mbti/html/main.html" target="blank"><i></i></a></li>
+            <li><a href="#" onclick="location.href='../html/index.html'" target="blank"><i></i></a></li>
+            <li><a href="#" onclick="location.href='../html/index.html'" target="blank"><i></i></a></li>
+            <li><a href="#" onclick="location.href='../html/index.html'" target="blank"><i></i></a></li>
+            <li><a href="#" onclick="location.href='../html/index.html'" target="blank"><i></i></a></li>
         </ul>
     </div>
 
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+<script src="../js/chatting/chatting.js"></script>
 </html>

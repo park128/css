@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>채팅방</title>
+<meta charset="utf-8">
+
+
+<!-- header에서 들고온 link -->
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet"
+	th:href="@{/plugin/mCustomScrollbar/jquery.mCustomScrollbar.min.css}" />
+
+</head>
+
+
+
+
+
+<body>
+
+	<div class="fixed-navbar">
+		<div>
+			<th:block layout:fragment="title">
+			MBTI 채팅방
+			</th:block>
+		</div>
+	</div>
+
+	<!-- 위에는 파란색 대가리 부분을 의미한다!     -->
+
+	<div id="wrapper">
+		<div class="main-content" id="app">
+			<div class="row row-inline-block small-spacing">
+				<div class="col-xs-12">
+					<div class="box-content">
+						<div class="clearfix">
+							<h4 class="box-title pull-left"></h4>
+							<th:block layout:fragment="search"></th:block>
+						</div>
+						<th:block layout:fragment="paging">
+							<div class="input-group">
+								<input type="text" class="form-control" v-model="room_name"
+									v-on:keyup.enter="createRoom">
+								<!-- 방 개설하는 데 필수적 요소 -->
+								<button class="btn btn-primary" type="button"
+									@click="createRoom">채팅방 개설</button>
+							</div>
+						</th:block>
+					</div>
+
+					<th:block layout:fragment="add-content"></th:block>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- JavaScript -->
+	<script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
+	<script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
+	<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            room_name : '',
+            chatrooms: [
+            ]
+        },
+        created() {
+            this.findAllRoom();
+        },
+        methods: {
+            findAllRoom: function() {
+                axios.get('/chatroom/rooms').then(response => { this.chatrooms = response.data; });
+            },
+            
+            //방을 생성하는 부분
+            createRoom: function() {
+                if("" === this.room_name) {
+                    alert("방 제목을 입력해 주십시요.");
+                    return;
+                } else {
+                    var params = new URLSearchParams();
+                    params.append("name",this.room_name);
+                 
+                    
+                    axios.post('/chatroom/room', params)
+                    
+                        .then(
+                            response => {
+                                alert(response.data.roomName+"방 개설에 성공하였습니다.")                                
+                                this.room_name = '';
+                                this.findAllRoom();
+                                
+                              		//들어갈 때 닉네임을 입력하는 부분
+                                	
+                                	var sender = '[(${info.userId})]';
+                              		//이게 룸아이디다!!
+                                	var roomId=response.data.roomId;
+                                	
+                                	console.log("여기까지는 됨2");
+                                	if(sender !== "") {
+                                    localStorage.setItem('wschatroom.sender',sender);  
+     			                    localStorage.setItem('wschatroom.roomId',roomId);                                  
+                                    window.location.href="/chatroom/room/enter/"+roomId;
+                                }
+                            }
+                        )
+                        .catch( response => { alert("채팅방 개설에 실패하였습니다."); } );
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

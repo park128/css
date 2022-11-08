@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>채팅방</title>
+<meta charset="utf-8">
+
+
+<!-- header에서 들고온 link -->
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet"
+	th:href="@{/plugin/mCustomScrollbar/jquery.mCustomScrollbar.min.css}" />
+
+</head>
+
+
+
+
+
+<body>
+
+	<div class="fixed-navbar">
+		<div>
+			<th:block layout:fragment="title">
+			MBTI 채팅방
+			</th:block>
+		</div>
+	</div>
+
+	<!-- 위에는 파란색 대가리 부분을 의미한다!     -->
+
+	<div id="wrapper">
+		<div class="main-content" id="app">
+			<div class="row row-inline-block small-spacing">
+				<div class="col-xs-12">
+					<div class="box-content">
+						<div class="clearfix">
+							<h4 class="box-title pull-left"></h4>
+
+							<th:block layout:fragment="search"></th:block>
+						</div>
+
+						<th:block layout:fragment="content">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										
+										<th>제목</th>
+										<th>작성자</th>
+										<th>등록일</th>
+										<th>참여인원</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr v-for="item in chatrooms" v-bind:key="item.roomId"
+										v-on:click="enterRoom(item.roomId)">
+										
+										<th>{{item.roomName}}</th>
+										<th>[[${info.userName}]]</th>
+										<th>{{item.createdDate}}</th>
+										<th>{{item.roomId}}</th>
+									</tr>
+								</tbody>
+							</table>
+						</th:block>
+
+						<th:block layout:fragment="paging">
+
+
+							<a class="btn btn-sm btn-outline-secondary" th:href="@{/chatroom/makeroom}">방만들기</a>
+						</th:block>
+					</div>
+
+					<th:block layout:fragment="add-content"></th:block>
+				</div>
+			</div>
+
+			<footer class="footer">
+				<ul class="list-inline">
+					<li>여기는 혹시 모르니까 남녀놓자!</li>
+				</ul>
+			</footer>
+		</div>
+	</div>
+
+
+
+	<!-- JavaScript -->
+	<script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
+	<script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
+	<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            room_name : '',
+            chatrooms: [
+            ]
+        },
+        created() {
+            this.findAllRoom();
+        },
+        methods: {
+            findAllRoom: function() {
+                axios.get('/chatroom/rooms').then(response => { this.chatrooms = response.data; });
+            },
+
+            enterRoom: function(roomId) {
+            	
+                var sender = '[(${info.userId})]';
+                if(sender !== "") {
+                    localStorage.setItem('wschatroom.sender',sender);
+                    localStorage.setItem('wschatroom.roomId',roomId);
+                    location.href="/chatroom/room/enter/"+roomId;
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
+
+
+
+

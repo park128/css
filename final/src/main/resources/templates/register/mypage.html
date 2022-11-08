@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>정보수정</title>
+</head>
+<body>
+<form id="updateForm" method="post" autocomplete="off">
+
+<div th:text="${info.userId}"></div>
+<div th:text="${info.userPw}"></div>
+<div th:text="${info.userName}"></div>
+
+
+
+</form>
+<button type="button" onclick="location.href='/register/rename'">닉네임바꾸기</button>
+<button type="button" onclick="location.href='/register/resign'">탈퇴하기</button>
+</body>
+	<script th:inline="javascript">
+        /*<![CDATA[*/
+        	
+        /*]]>*/
+        
+        </script>
+        
+</html>

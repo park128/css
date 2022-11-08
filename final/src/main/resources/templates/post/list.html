@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
+    <th:block layout:fragment="title">  
+        <h1 class="page-title">
+        <a th:href="@{/post/list}">MBTI 게시판</a>
+        </h1>
+        
+        	<span class="gocenter">
+        		
+        		<!-- <span th:text="${info.userNo}"></span>
+    			<span th:text="${info.userId}"></span>
+    			<span th:text="${info.userPw}"></span> -->
+    			<!-- <span th:text="${info.userName}"></span> -->
+        	</span>
+        	
+    		
+    		
+          	     
+    </th:block>
+
+    <th:block layout:fragment="search">
+        <div id="adv-search" class="input-group">
+            <input type="search" id="mainKeyword" class="form-control" onkeyup="document.getElementById('keyword').value = this.value;" placeholder="키워드를 입력해 주세요." />
+            <div class="input-group-btn">
+                <div class="btn-group" role="group">
+                    <div class="dropdown dropdown-lg">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                            <!--/* 검색 form */-->
+                            <form id="searchForm" class="form-horizontal" onsubmit="return false;" autocomplete="off">
+                                <div class="form-group">
+                                    <label for="searchType">검색 유형</label>
+                                    <select id="searchType" name="searchType" class="form-control">
+                                        <option value="">전체</option>
+                                        <option value="title">제목</option>
+                                        <option value="content">내용</option>
+                                        <option value="writer">작성자</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="keyword">키워드</label>
+                                    <input type="search" id="keyword" name="keyword" class="form-control" onkeyup="document.getElementById('mainKeyword').value = this.value;" placeholder="키워드를 입력해 주세요." />
+                                </div>
+                                <button type="button" onclick="movePage(1);" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                            </form>
+                        </div>
+                    </div>
+                    <button type="button" onclick="movePage(1);" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </div>
+            </div>
+        </div>
+    </th:block>
+    
+    <th:block layout:fragment="content">
+        <div class="table-responsive clearfix">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>등록일</th>
+                        <th>조회수</th>
+                    </tr>
+                </thead>
+                 <tbody id="list"> 
+                    
+                </tbody>
+            </table>
+
+            <div class="btn_wrap text-right">
+                <a th:href="@{/post/write}" class="btn btn-primary waves-effect waves-light">등록</a>
+            </div>
+
+            <th:block layout:fragment="paging">
+                <nav aria-label="Page navigation" class="text-center">
+                    <ul class="pagination">
+                       
+                    </ul>
+                </nav>
+            </th:block>
+        </div>
+    </th:block>
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+
+            window.onload = () => {
+            	
+            	setQueryStringParams();
+                findAllPost();
+            }
+
+
+            // 게시글 리스트 조회
+            function findAllPost() {
+
+                const list = [[ ${response.list} ]];
+                if ( !list.length ) {
+                    document.getElementById('list').innerHTML = '<td colspan="5">검색된 결과가 없습니다.</td>';
+                    drawPage();
+                    return false;
+                }
+
+                const pagination = [[ ${response.pagination} ]];
+                const params = [[ ${params} ]];
+                let num = pagination.totalRecordCount - ((params.page - 1) * params.recordSize);
+
+                drawList(list, num);
+                drawPage(pagination, params);
+            }
+
+
+            // 리스트 HTML draw
+            function drawList(list, num) {
+
+                let html = '';
+                list.forEach(obj => {
+                    html += `
+                        <tr>
+                            <td>${obj.noticeYn === true ? '공지' : num--}</td>
+                            <td><a href="javascript: void(0);" onclick="goViewPage(${obj.id});">${obj.title}</a></td>
+                            <td>${obj.writer}</td>
+                            <td>${obj.createdDate}</td>
+                            <td>${obj.viewCnt}</td>
+                        </tr>
+                    `;
+                })
+
+                document.getElementById('list').innerHTML = html;
+            }
+
+
+            // 페이지 HTML draw
+            function drawPage(pagination, params) {
+
+                if ( !pagination || !params ) {
+                    document.querySelector('.pagination').innerHTML = '';
+                    return false;
+                }
+
+                let html = '';
+
+                // 첫 페이지, 이전 페이지
+                if (pagination.existPrevPage) {
+                    html += `
+                        <li><a href="javascript:void(0)" onclick="movePage(1);" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                        <li><a href="javascript:void(0)" onclick="movePage(${pagination.startPage - 1});" aria-label="Previous"><span aria-hidden="true">&lsaquo;</span></a></li>
+                    `;
+                }
+
+                // 페이지 번호
+                for (let i = pagination.startPage; i <= pagination.endPage; i++) {
+                    const active = (i === params.page) ? 'class="active"' : '';
+                    html += `<li ${active}><a href="javascript:void(0)" onclick="movePage(${i})">${i}</a></li>`;
+                }
+
+                // 다음 페이지, 마지막 페이지
+                if (pagination.existNextPage) {
+                    html += `
+                        <li><a href="javascript:void(0)" onclick="movePage(${pagination.endPage + 1});" aria-label="Next"><span aria-hidden="true">&rsaquo;</span></a></li>
+                        <li><a href="javascript:void(0)" onclick="movePage(${pagination.totalPageCount});" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                    `;
+                }
+
+                document.querySelector('.pagination').innerHTML = html;
+            }
+
+
+            // 페이지 이동
+            function movePage(page) {
+
+                const form = document.getElementById('searchForm');
+                const queryParams = {
+                    page: (page) ? page : 1,
+                    recordSize: 10,
+                    pageSize: 10,
+                    keyword: form.keyword.value,
+                    searchType: form.searchType.value
+                }
+
+                location.href = location.pathname + '?' + new URLSearchParams(queryParams).toString();
+            }
+            
+            // 쿼리 스트링 파라미터 셋팅
+            function setQueryStringParams() {
+
+                if ( !location.search ) {
+                    return false;
+                }
+
+                const form = document.getElementById('searchForm');
+
+                new URLSearchParams(location.search).forEach((value, key) => {
+                    if (form[key]) {
+                        form[key].value = value;
+                    }
+                })
+
+                document.getElementById('mainKeyword').value = form.keyword.value;
+            }
+
+            // 게시글 상세 페이지로 이동
+            function goViewPage(id) {
+                const queryString = (location.search) ? location.search + `&id=${id}` : `?id=${id}`;
+                location.href = '/post/view' + queryString;
+            }
+            /*]]>*/
+        </script>
+    </th:block>
+    
+    
+</html>

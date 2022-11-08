@@ -1,27 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-    <link rel="stylesheet" href="/mbti/css/div.css">
-    <title>MBTI</title>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="/mbti/css//main/main.css">
 </head>
-<body>
-    <div class="aaa">
-        <img src="/mbti/img/0106-12.jpg" alt="My image" style="width: 100%; height: 1200px;">
-    </div>
-    
+<body> 
     <div class="header">
-        <div class="header-time">
-            2022-10-28 | 10:30
+        <div id="header-time">
+
         </div>
         <div class="header-logo">
-            <a class="a_t"><img src="/mbti/img/KakaoTalk_20221102_003617932.png" alt=""></a>
+            <img src="../img/KakaoTalk_20221102_003617932.png" alt="Logo" width="100px" height="80px">
         </div>
         <button class="close">
             <div class="top_menu">
@@ -45,145 +38,79 @@
                     <li>MBTI 검사</li>
                     <li>쇼핑몰</li>
                     <li>내 게시물</li>
-                    <li><a href="/mbti/html/login.html">Log Out</a></li>
+                    <li><a href="#" onclick="location.href='../html/login.html'">Log Out</a></li>
                     </ul>
                 </div>
         </button>
     </div>
-<!------------------------------------------ 계시판 부분 ----------------------------------------------------->
 
-<div class="bbbb">
-    <table>
-        <thead>
-            <tr>
-                <th>USER</th>
-                <th>MBTI</th>
-                <th>아이디</th>
-                <th>좋아요</th>
-                <th>게시물</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><img src="https://i.postimg.cc/yYYd1HV1/katara.jpg" alt="img"></td>
-                <td>ENFJ</td>
-                <td>박근태</td>
-                <td>
-                    <div class="like-content">
-                        <button class="btn-secondary like-review">
-                            <i class="fa fa-heart" aria-hidden="true"></i> Like
-                        </button>
-                    
+
+    <div id="app">
+        <main class="sticky-container" ref="sticky-container">
+            <div class="sticky">
+                <div class="slide-container">
+                    <div class="slide" ref="sl1">
+                        <div class="slide-big-text">
+                            <p>안녕하세요.</p>
+                        </div>
                     </div>
-                </td>
-                <td>
-                    <button class="view">보기</button>
-                    <button class="delete">삭제하기</button>
-                </td>
-            </tr>
-
-            <tr>
-                <td><img src="https://i.postimg.cc/Y26YPMSb/zuko.jpg" alt="img"></td>
-                <td>ENFJ</td>
-                <td>박근태</td>
-                <td>
-                    <div class="like-content">  
-                    <button class="btn-secondary like-review">
-                    <i class="fa fa-heart" aria-hidden="true"></i> Like
-                    </button>
+                    <div class="scdown" ref="scdown">
+                        <div class="scdown-text">
+                            아래로 스크롤하세요.
+                        </div>
                     </div>
-                </td>
-                <td>
-                    <button class="view">보기</button>
-                    <button class="delete">삭제하기</button>
-                </td>
-            </tr>
-
-            <tr>
-            <td><img src="https://i.postimg.cc/yYYd1HV1/katara.jpg" alt="img"></td>
-                <td>ENFJ</td>
-                <td>박근태</td>
-                <td>                    
-                    <div class="like-content">  
-                    <button class="btn-secondary like-review">
-                    <i class="fa fa-heart" aria-hidden="true"></i> Like
-                    </button>
+                    <div class="slide" ref="sl2">
+                        <div class="slide-big-text">
+                            <p>MBTI 사이트 입니다.</p>
+                        </div>
                     </div>
-                </td>
-                <td>
-                    <button class="view">보기</button>
-                    <button class="delete">삭제하기</button>
-                </td>
-            </tr>
-
-            <tr>
-                <td><img src="https://i.postimg.cc/Y26YPMSb/zuko.jpg" alt="img"></td>
-                <td>ENFJ</td>
-                <td>박근태</td>
-                <td>
-                    <div class="like-content">  
-                    <button class="btn-secondary like-review">
-                    <i class="fa fa-heart" aria-hidden="true"></i> Like
-                    </button>
+                    <div class="slide sl3" ref="sl3">
+                        <div class="slide-big-text">
+                            <p>
+                                나의 성향을 알아가고
+                            </p>
+                            <p>통하는 이들과 소통해보세요</p>
+                        </div>
                     </div>
-                </td>
-                <td>
-                    <button class="view">보기</button>
-                    <button class="delete">삭제하기</button>
-                </td>
-            </tr>
-
-            <tr>
-                <td><img src="https://i.postimg.cc/yYYd1HV1/katara.jpg" alt="img"></td>
-                <td>ENFJ</td>
-                <td>박근태</td>
-                <td>
-                    <div class="like-content">  
-                    <button class="btn-secondary like-review">
-                    <i class="fa fa-heart" aria-hidden="true"></i> Like
-                    </button>
+                    <div class="slide slide-left sl4" ref="sl4">
+                        <div class="sl4-content">
+                            <div class="slide-big-text" ref="sl4-big">
+                                <p ref="sl4-big-1">소통과</p>
+                                <p ref="sl4-big-2">힐링이</p>
+                                <p ref="sl4-big-3">함께 하는 사이트</p>
+                            </div>
+                            <div class="slide-small-text">
+                                <p>
+                                    Communication department
+                                </p>
+                                <p>
+                                    Healing
+                                </p>
+                                <p>
+                                    Together Site
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </td>
-                <td>
-                    <button class="view">보기</button>
-                    <button class="delete">삭제하기</button>
-                </td>
-            </tr>
-
-            <tr>
-                <td><img src="https://i.postimg.cc/Y26YPMSb/zuko.jpg" alt="img"></td>
-                <td>ENFJ</td>
-                <td>박근태</td>
-                <td>
-                    <div class="like-content">  
-                    <button class="btn-secondary like-review">
-                    <i class="fa fa-heart" aria-hidden="true"></i> Like
-                    </button>
+                    <div class="wave" ref="wave">
+                        <img src="/mbti/img/soso.png" style="width: 500px;">
                     </div>
-                </td>
-                <td>
-                    <button class="view">보기</button>
-                    <button class="delete">삭제하기</button>
-                </td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <td colspan="5" class="tablefoot"></td>
-        </tfoot>
-    </table>
-</div>
 
-    <!-- 각종 연결하는 아이콘 -->
+                    <div class="slide slide-left sl5" ref="sl5">
+                        <div class="slide-big-text">
+                            <p>MBTI 사이트는</p>
+                            <p>당신의 하루가 즐거울 수 있게</p>
+                            <p>나날이 발전해 가겠습니다.</p>
+                        </div>
+                        <div class="go-surf-wrapper">
+                            <a href="/mbti/html/login.html" target="_blank" style="font-size: 30px;">회원가입을 통해 대화를 시작해보세요.</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
 
-    <div class="social-menu">
-        <ul>
-            <li><a href="/mbti/html/chatting.html" target="blank"><i></i></a></li>
-            <li><a href="/mbti/html/chatting.html" target="blank"><i></i></a></li>
-            <li><a href="/mbti/html/chatting.html" target="blank"><i></i></a></li>
-            <li><a href="/mbti/html/chatting.html" target="blank"><i></i></a></li>
-        </ul>
     </div>
+    <script type="module" src="/mbti/js/main/cdepen.js"></script>
 </body>
-<script src="/mbti/js/like.js"></script>
-<script src="/mbti/js/Screen.js"></script>
 </html>

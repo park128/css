@@ -1,0 +1,250 @@
+
+.text {
+    position: absolute;
+    pointer-events: none;
+    font-family: venn-extended, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 4em;
+    bottom: 800px;
+    -webkit-text-stroke: 1px #fff;
+    /*font-weight: 500;
+    text-transform: uppercase;*/
+    color: #161616;
+}
+
+.text span {
+    color: #fff;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+.white{
+    font:lialic bold 1.5em/1em Georgin, serif; color: white;
+}
+
+#header-time{
+    font:lialic bold 1.5em/1em Georgin, serif;
+    font-size: 18px;
+    color: white;
+    top: 56px;
+    left: 104px;
+    width: auto;
+    height: 30px;
+    position: absolute;
+    display: inline-block;
+}
+
+.header-logo{
+    font-size: 25px;
+    top: 40px;
+    right: 45.5%;
+    width: 100px;
+    height: 80px;
+    position: absolute;
+    text-align: center;
+    display: inline-block;
+}
+
+
+.close{
+    font-size: 13px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 50px;
+    display: inline-block;
+    position: absolute;
+    top: 44px;
+    right: 32px;
+    height: 41px;
+    width: 128px;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+/*---------------------------------menu-------------------------------------  */
+.top_menu{
+    background-color: transparent;
+    display: inline-block;
+    position: fixed;
+    top: 54px;
+    right: 85px;
+    height: 20px;
+    width: 65px; 
+}
+
+.aaa{
+    overflow: hidden;
+    width: 100%; 
+    height: 1200px;
+}
+
+.menu {
+    font-size: 17px;
+}
+
+
+.hamburger input[type="checkbox"]{
+    width: 130px;
+    height: 50px;
+    position: absolute;
+    top: -6px;
+    left: -8px;
+    display:block ;
+    z-index: 3;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.hamburgerlines{
+    width: 30px;
+    height: 20px;
+    position: absolute;
+    top: 11px;
+    left: 70px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hamburgerlines .lines{
+    display: block;
+    height: 4px;
+    width: 90%;
+    background: #fff;
+    border-radius: 5px; 
+}
+
+.hamburger{
+    position: relative;
+}
+
+.menu-items{
+    padding-top: 100px;
+    transform: translate(150%);
+    transition: transform 0.5s ease-in-out;
+    padding-left: 15px;
+    background: #232323;
+    margin-top: -3px;
+    color: #fff;
+    padding-bottom: 1rem;
+    max-width: 400px;
+    width: 100%;
+    height: 100vh;
+    overflow: scroll;
+}
+
+.menu-items li{
+    margin-bottom: 2rem;
+    margin-right: 2.5rem;
+    font-size: 1rem;
+}
+
+.hamburger input[type="checkbox"]:checked ~ .menu-items{
+    display: block;
+    transform: translate(55%);
+    background: #232323;
+    
+}
+
+.hamburger input[type="checkbox"]:checked ~ .hamburgerlines .lines{
+    background: #fff;
+}
+
+.hamburgerlines .line1{
+    transform-origin: 0% 0%;
+    transition: transform 0.3s ease-in-out;    
+}
+
+.hamburgerlines .line3{ 
+    transform-origin: 0% 100%;
+    transition: transform 0.3s ease-in-out;  
+}
+
+.hamburger input[type="checkbox"]:checked ~ .hamburgerlines .line1{
+    transform: rotate(45deg);
+}
+
+.hamburger input[type="checkbox"]:checked ~ .hamburgerlines .line2{
+    display: none;
+}
+
+
+.hamburger input[type="checkbox"]:checked ~ .hamburgerlines .line3{
+    transform: rotate(-45deg);
+}
+
+
+/* 아이콘 연결 css */
+
+.social-menu ul{
+    position: fixed;
+    bottom: 2%;
+    left: 50%;
+    padding: 0;
+    margin: 0;
+    transform: translate(-50%, -50%);
+    display: flex;
+}
+
+.social-menu ul li{
+    list-style: none;
+    margin: 0 15px;
+}
+
+.social-menu ul li .fab{
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+    line-height: 60px;
+    transition: .3s;
+    color: #000;
+}
+
+.social-menu ul li .fab:hover{
+    color: #fff;
+}
+
+/* 동그라미 마다 색 지정하는 방법 배우기 */
+
+.social-menu ul li a{
+    position: relative;
+    display: block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #fff;
+    text-align: center;
+    transition: .5s;
+    box-shadow: 0 5px 4px rgba(0,0,0,.5);
+}
+
+/* ---------------------------------------------------------- */
+
+.social-menu ul li a:hover{
+    transform: translate(0, -30%);
+}
+
+.social-menu ul li:nth-child(1) a:hover{
+    background-color: #0a436c;
+}
+.social-menu ul li:nth-child(2) a:hover{
+    background-color: #485a4f;
+}
+.social-menu ul li:nth-child(3) a:hover{
+    background-color: #ff9e2c;
+}
+.social-menu ul li:nth-child(4) a:hover{
+    background-color: #de554e;
+}
