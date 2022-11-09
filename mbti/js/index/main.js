@@ -70,21 +70,21 @@ chatAni.addEventListener("click", function(){
 restAni.addEventListener("click", function() {
     buttonClose();
     setTimeout(function(){
-        window.location.href = '../html/resttime.html';
+        window.location.href = '../html/chatting.html';
     }, 2000)
 })
 
 creditAni.addEventListener("click", function(){
     buttonClose();
     setTimeout(function(){
-        window.location.href = '../html/Credits.html';
+        window.location.href = '../html/Healing.html';
     }, 1800);
 })
 
 noticeAni.addEventListener("click", function(){
     buttonClose();
     setTimeout(function(){
-        window.location.href = '../html/main.html';
+        window.location.href = '../html/BulletinBoard.html';
     }, 1800);
 })
 

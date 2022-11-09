@@ -44,14 +44,19 @@ body {
   top: 28vh;
   left: 15vw;
   border-radius: 30px;
+  perspective: 1000px;
 }
 
 .card1{
-  position: absolute;
+  position: relative;
   width: 20vw;
   height: 48vh;
+  display: inline-block;
   border-radius: 30px;
   background-size: cover;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  cursor: pointer;
 }
 
 .card2{
@@ -78,4 +83,23 @@ body {
   height: 100%;
   border-radius: 30px;
   border: 1px solid #DCCFEC;
+}
+
+.front1, .back1 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+}
+
+.back1 {
+  background-color: #DCCFEC;
+  transform: rotateY(180deg);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
 }
