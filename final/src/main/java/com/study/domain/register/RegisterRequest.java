@@ -15,4 +15,6 @@ public class RegisterRequest {
 	private String userId;        // 아이디
     private String userPw;      // 비밀번호
     private String userName;       // 닉네임
+    private String userEmail;  // 이메일
+    private String userMbti;  // MBTI
 }

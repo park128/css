@@ -11,7 +11,9 @@ public class RegisterResponse {
     private String userId;                 
     private String userPw;                
     private String userName;               
-    private String userAuth;                   
+    private String userAuth;
+    private String userMbti;
+    private String userEmail;
     private LocalDateTime appendDate;            
     private LocalDateTime updateDate;           
 }

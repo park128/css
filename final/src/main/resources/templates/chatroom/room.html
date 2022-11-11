@@ -7,24 +7,91 @@
 
 <!-- header에서 들고온 link -->
 <link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet" th:href="@{/made/css/chatting/chatting.css}" />
+<link rel="stylesheet" th:href="@{/made/css/chatting/chatting_a.css}" />
 <link rel="stylesheet"
 	th:href="@{/plugin/mCustomScrollbar/jquery.mCustomScrollbar.min.css}" />
 
 </head>
+<body> 
 
 
+    <div class="cursor">
+        <div class="text">MBTI</div>
+        <div class="text">MBTI</div>
+        <div class="text">MBTI</div>
+        <div class="text">MBTI</div>
+        <div class="text"><span>MBTI</span></div>
+    </div>
+
+    <div class="night">
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+    </div>
+    <div class="header">
+        <div id="header-time">
+            
+        </div>
+        <div class="header-logo">
+            <img src="/made/img/main.png" alt="Logo" width="100px" height="80px">
+        </div>
+        <button class="close">
+            <div class="top_menu">
+                <span class="menu">menu</span>
+            </div>
+            <div class="hamburger">
+                <input type="checkbox">
+                <div class="hamburgerlines">
+                    <span class="lines line1">
+        
+                    </span>
+                    <span class="lines line2">
+        
+                    </span>
+                    <span class="lines line3">
+        
+                    </span>
+                </div>
+                <ul class="menu-items">
+                    <li>내 정보</li>
+                    <li>MBTI 검사</li>
+                    <li>쇼핑몰</li>
+                    <li>내 게시물</li>
+                    <li><a href="#" onclick="location.href='../html/login.html'">Log Out</a></li>
+                    </ul>
+                </div>
+        </button>
+    </div>
 
 
+    <div class="social-menu">
+        <ul>
+            <li><a href="#" onclick="location.href='/mbti/html/index.html'" target="blank"><i></i></a></li>
+            <li><a href="#" onclick="location.href='/mbti/html/chatting.html'" target="blank"><i></i></a></li>
+            <li><a href="#" onclick="location.href='/mbti/html/Healing.html'" target="blank"><i></i></a></li>
+            <li><a href="#" onclick="location.href='/mbti/html/BulletinBoard.html'" target="blank"><i></i></a></li>
+        </ul>
+    </div>
 
-<body>
-
-	<div class="fixed-navbar">
-		<div>
-			<th:block layout:fragment="title">
-			MBTI 채팅방
-			</th:block>
-		</div>
-	</div>
+<!-- css 적용한 것 -->
 
 	<!-- 위에는 파란색 대가리 부분을 의미한다!     -->
 
@@ -43,7 +110,7 @@
 							<table class="table table-hover">
 								<thead>
 									<tr>
-										
+
 										<th>제목</th>
 										<th>작성자</th>
 										<th>등록일</th>
@@ -53,12 +120,12 @@
 
 								<tbody>
 									<tr v-for="item in chatrooms" v-bind:key="item.roomId"
-										v-on:click="enterRoom(item.roomId)">
-										
+										v-on:click="enterRoom(item.roomId,item.roomMaker)">
+
 										<th>{{item.roomName}}</th>
-										<th>[[${info.userName}]]</th>
+										<th>{{item.roomMaker}}</th>
 										<th>{{item.createdDate}}</th>
-										<th>{{item.roomId}}</th>
+										<th>{{item.participant}}</th>
 									</tr>
 								</tbody>
 							</table>
@@ -67,7 +134,8 @@
 						<th:block layout:fragment="paging">
 
 
-							<a class="btn btn-sm btn-outline-secondary" th:href="@{/chatroom/makeroom}">방만들기</a>
+							<a class="btn btn-sm btn-outline-secondary"
+								th:href="@{/chatroom/makeroom}">방만들기</a>
 						</th:block>
 					</div>
 
@@ -75,20 +143,64 @@
 				</div>
 			</div>
 
-			<footer class="footer">
-				<ul class="list-inline">
-					<li>여기는 혹시 모르니까 남녀놓자!</li>
-				</ul>
-			</footer>
-		</div>
-	</div>
+			
+
+					<footer class="footer">
+						<ul class="list-inline">
+							<li>여기는 혹시 모르니까 남녀놓자!</li>
+						</ul>
+					</footer>
+				</div>
+			</div>
 
 
 
-	<!-- JavaScript -->
-	<script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
-	<script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
-	<script>
+			<!-- JavaScript -->
+			<script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
+			<script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
+			<script>
+			   window.onpageshow = function(event) {
+			       if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+			    	 	
+			    	 	this.roomId=localStorage.getItem('wschatroom.roomId');
+			    	 	axios.get("/chatroom/room/exit/"+this.roomId)
+		            	.then(
+		                        response => {                                             
+		                            console.log(response.data);
+		                            if(response.data ==0){
+		                            	//남아 있는 사람이 없기에 방을 폭파해야하는 경우
+		                            	
+		                            	var params = new URLSearchParams();
+		                                params.append("name",this.roomId);
+		                                              
+		                                axios.post("/chatroom/eraseit", params)               
+		                                .then(
+		                                        response => {
+		                                                                                                     	                                                               
+		                                                window.location.href="/chatroom/room"                           
+		                                        }
+		                                    )
+		                                    .catch( response => { alert("삭제 실패"); } ); 
+		                            }
+		                            else{
+		                            	//남아 있는 사람이 있기에 그냥 나간다.
+		                            	/* alert("나만 조용히 나갑니다"); */
+		                            	window.location.href="/chatroom/room"    
+		                            }
+		                                                          
+		                        }
+		                    )
+		                    .catch( response => { alert("입장 실패"); } );
+			       }
+			       else{
+			        
+			       }
+			   }
+			
+			
+			
+			
+			
     var vm = new Vue({
         el: '#app',
         data: {
@@ -104,18 +216,34 @@
                 axios.get('/chatroom/rooms').then(response => { this.chatrooms = response.data; });
             },
 
-            enterRoom: function(roomId) {
+            enterRoom: function(roomId,roomMaker) {
             	
                 var sender = '[(${info.userId})]';
                 if(sender !== "") {
                     localStorage.setItem('wschatroom.sender',sender);
                     localStorage.setItem('wschatroom.roomId',roomId);
+                    localStorage.setItem('wschatroom.roomMaker',roomMaker); // roomMaker값 넣기 */
                     location.href="/chatroom/room/enter/"+roomId;
+                    
                 }
             }
         }
     });
 </script>
+
+
+    <div class="social-menu">
+        <ul>
+            <li><a href="#" onclick="location.href='/mbti/html/index.html'" target="blank"><i></i></a></li>
+            <li><a href="#" onclick="location.href='/mbti/html/chatting.html'" target="blank"><i></i></a></li>
+            <li><a href="#" onclick="location.href='/mbti/html/Healing.html'" target="blank"><i></i></a></li>
+            <li><a href="#" onclick="location.href='/mbti/html/BulletinBoard.html'" target="blank"><i></i></a></li>
+        </ul>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+	<script src="/made/js/chatting/chatting.js"></script>
 </body>
 </html>
 

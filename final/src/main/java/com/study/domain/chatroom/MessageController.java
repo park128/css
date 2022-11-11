@@ -18,5 +18,5 @@ public class MessageController {
         }
         sendingOperations.convertAndSend("/topic/chatroom/room/"+message.getRoomId(),message);
     }
-
+ 
 }

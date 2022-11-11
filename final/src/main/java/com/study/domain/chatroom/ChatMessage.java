@@ -24,5 +24,7 @@ public class ChatMessage {
     private String message;
     //채팅방 인원수
     private long userCount;
+    //방이름
+    private String roomName;
        
 }

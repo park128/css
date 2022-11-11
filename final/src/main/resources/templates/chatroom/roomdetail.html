@@ -1,51 +1,91 @@
 <!doctype html>
-<html lang="ko" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="ko" xmlns:v-on="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout/basic">
 <head>
-    <title>채팅방</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css">
-    <style>
-        [v-cloak] {
-            display: none;
-        }
-    </style>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css">
+
+
+
+<style>
+[v-cloak] {
+	display: none;
+}
+</style>
 </head>
 <body>
-<div class="container" id="app" v-cloak>
-    <div>
-        <h2>{{room.name}}</h2>
-    </div>
-    <div class="input-group">
-        <div class="input-group-prepend">
-            <label class="input-group-text">내용</label>
-        </div>
-        <input type="text" class="form-control" v-model="message" v-on:keypress.enter="sendMessage">
-        <div class="input-group-append">
-            <button class="btn btn-primary" type="button" @click="sendMessage">보내기</button>
-            
-        </div>
-        
-    </div>
-    <button class="btn btn-primary" type="button" @click="exitHere">나가기</button>
-    <ul class="list-group">
-        <li class="list-group-item" v-for="message in messages">
-            {{message.sender}} - {{message.message}}
-        </li>
-    </ul>
-    <div></div>
-</div>
-<!-- JavaScript -->
-<script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
-<script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
-<script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
-<script src="/webjars/stomp-websocket/2.3.3-1/stomp.min.js"></script>
-<script>
+
+<th:block layout:fragment="title">
+	<h1 class="page-title">		
+		<span v-text=localStorage.getItem('wschatroom.roomName')>
+			채팅방
+		</span>
+	</h1>
+</th:block>
+
+<th:block layout:fragment="content">
+	<div class="container" id="app" v-cloak>
+
+
+
+		<ul class="list-group">
+		
+		<!-- v-for문을 그냥 사용하여 채팅을 하면 새로운 채팅이 위에 나타난다. 이를 해결하기 위해 v-for문을 역순으로 출력되게 해야하는데
+		이때 출력하고자 하는 배열에.slice().reverse()를 붙이면 정상적으로 출력이 된다. -->
+		
+			<li class="list-group-item" v-for="message in messages.slice().reverse()" >
+				{{message.sender}} : {{message.message}}
+			</li>
+
+		</ul>
+		
+		
+		
+		<div>
+			
+		<div class="input-group">
+
+			<input type="text" class="form-control" size=170% v-model="message" v-on:keypress.enter="sendMessage">
+			<div class="input-group-append">
+				<button class="btn btn-primary" id="button_send" type="button" @click="sendMessage">보내기</button>
+
+			</div>
+
+		</div>
+				<!-- <div v-if=localStorage.getItem('wschatroom.sender')==localStorage.getItem('wschatroom.roomMaker')>
+					<button class="btn btn-primary" type="button" @click="exitHere">방없애기</button>
+				</div>																			
+				<div v-else>
+					<button class="btn btn-primary" type="button" @click="printit">나가기</button>
+				</div> -->
+					<button class="btn btn-primary" type="button" @click="getout">나가기</button>
+
+			</div>
+			</div>
+	    </th:block>
+	    
+</body>
+
+<th:block layout:fragment="script">
+			<!-- JavaScript -->
+			<script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
+			<script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
+			<script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
+			<script src="/webjars/stomp-websocket/2.3.3-1/stomp.min.js"></script>
+
+			<script>
     //alert(document.title);
     // websocket & stomp initialize
+
+
     var sock = new SockJS("/ws/chatroom");
     var ws = Stomp.over(sock);
     var reconnect = 0;
@@ -57,14 +97,22 @@
             room: {},
             sender: '',
             message: '',
-            messages: []
+            messages: [],
+            chatrooms: []
+            
         },
         created() {
             this.roomId = localStorage.getItem('wschatroom.roomId');
             this.sender = localStorage.getItem('wschatroom.sender');
+            this.roomName = localStorage.getItem('wschatroom.roomName');
+            this.roomMaker = localStorage.getItem('wschatroom.roomMaker');
+           	
             this.findRoom();
         },
         methods: {
+        	findAllRoom: function() {
+                axios.get('/chatroom/rooms').then(response => { this.chatrooms = response.data; });
+            },
             findRoom: function() {
                 axios.get('/chatroom/room/'+this.roomId).then(response => { this.room = response.data; });
             },
@@ -75,16 +123,78 @@
             recvMessage: function(recv) {
                 this.messages.unshift({"type":recv.type,"sender":recv.type=='ENTER'?'[알림]':recv.sender,"message":recv.message})
             },
+            //이게 내가 만들고 있는 것() 
             exitHere: function(){
-            	window.history.back(-2);
+            	disconnect();           	            	
+            	console.log(this.roomName); //roomName을 제대로 받아오고 있는 것 확인           	
+            	var params = new URLSearchParams();
+                params.append("name",this.roomId);
+                              
+                axios.post("/chatroom/eraseit", params)               
+                .then(
+                        response => {
+                            alert("삭제 성공적")                                                          	                                                               
+                                window.location.href="/chatroom/room"                           
+                        }
+                    )
+                    .catch( response => { alert("삭제 실패"); } );            	           	
+            },
+            printit:function(){
+            	console.log(this.roomMaker);
+            	console.log(this.sender);
+            	if(this.roomMaker==this.sender){
+            		console.log("일치한다");
+            	}
+            	else{
+            		console.log("일치하지 않는다");
+            	}
+            },
+            //나가기 버튼 눌렀을 때 일어나는 일
+            getout:function(){
+            	ws.subscribe("/topic/chatroom/room/"+vm.$data.roomId).unsubscribe();            	
+            	ws.disconnect();
+            	
+            	axios.get("/chatroom/room/exit/"+this.roomId)
+            	.then(
+                        response => {                                             
+                            console.log(response.data);
+                            if(response.data ==0){
+                            	//남아 있는 사람이 없기에 방을 폭파해야하는 경우
+                            	/* alert("방을 폭파합니다"); */
+                            	var params = new URLSearchParams();
+                                params.append("name",this.roomId);
+                                              
+                                axios.post("/chatroom/eraseit", params)               
+                                .then(
+                                        response => {
+                                            /* alert("삭제 성공적")   */                                                        	                                                               
+                                                window.location.href="/chatroom/room"                           
+                                        }
+                                    )
+                                    .catch( response => { alert("삭제 실패"); } ); 
+                            }
+                            else{
+                            	//남아 있는 사람이 있기에 그냥 나간다.
+                            	alert("나만 조용히 나갑니다");
+                            	window.location.href="/chatroom/room"    
+                            }
+                                                          
+                        }
+                    )
+                    .catch( response => { alert("입장 실패"); } );
+            	
             }
             
             
         }
     });
     function disconnect(){
-    	
-    	
+    	//disconnect해주는 부분
+    	if(ws!==null){
+    		ws.subscribe("/topic/chatroom/room/"+vm.$data.roomId).unsubscribe();
+    		ws.disconnect();
+    	}
+    	ws=null;  	
     }
     
 
@@ -109,7 +219,9 @@
     }
     connect();
     
+
+    
   
 </script>
-</body>
+</th:block>
 </html>

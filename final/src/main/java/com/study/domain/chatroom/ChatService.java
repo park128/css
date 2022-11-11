@@ -37,17 +37,44 @@ public class ChatService {
 
     //채팅방 하나 불러오기
     public ChatRoom findById(String roomId) {
+    	
         return chatRooms.get(roomId);
     }
 
     //채팅방 생성
-    public ChatRoom createRoom(String name) {
-        ChatRoom chatRoom = ChatRoom.create(name);
-        int now= chatRoom.getChatnum();
-        chatRoom.setChatnum(now+1);
+    public ChatRoom createRoom(String name,String maker) {
+        ChatRoom chatRoom = ChatRoom.create(name,maker);
+        
         chatRooms.put(chatRoom.getRoomId(), chatRoom);
         
         return chatRoom;
+    }
+    //채팅방 전체 삭제(테스트용)
+    public void deleteRoom() {
+    	chatRooms.clear();
+    	
+    }
+    
+    //채팅방 삭제 제대로
+    public void deleteRoom1(String name) {
+    	chatRooms.remove(name);
+    	
+    }
+    
+    //입장인원 추가
+    public void updateParticipant(String roomId) {
+    	int a= chatRooms.get(roomId).getParticipant();    	  	
+    	a+=1;
+    	chatRooms.get(roomId).setParticipant(a);    	      
+    	
+    }
+    
+    //입장인원 없애기
+    public int minusParticipant(String roomId) {
+    	int a= chatRooms.get(roomId).getParticipant();   		
+    	a-=1;
+    	chatRooms.get(roomId).setParticipant(a);
+    	return a;
     }
 
 }

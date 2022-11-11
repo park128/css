@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:v-on="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout/basic">
 <head>
 <title>채팅방</title>
 <meta charset="utf-8">
@@ -18,18 +20,18 @@
 
 <body>
 
-	<div class="fixed-navbar">
-		<div>
-			<th:block layout:fragment="title">
-			MBTI 채팅방
-			</th:block>
-		</div>
-	</div>
+<th:block layout:fragment="title">
+	<h1 class="page-title">		
+		<span v-text=localStorage.getItem('wschatroom.roomName')>
+			채팅방
+		</span>
+	</h1>
+</th:block>
 
 	<!-- 위에는 파란색 대가리 부분을 의미한다!     -->
-
+<th:block layout:fragment="content">
 	<div id="wrapper">
-		<div class="main-content" id="app">
+		<div id="app">
 			<div class="row row-inline-block small-spacing">
 				<div class="col-xs-12">
 					<div class="box-content">
@@ -48,15 +50,53 @@
 						</th:block>
 					</div>
 
-					<th:block layout:fragment="add-content"></th:block>
+					
 				</div>
 			</div>
 		</div>
 	</div>
+	</th:block>
+	</body>
+	<th:block layout:fragment="script">
 	<!-- JavaScript -->
 	<script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
 	<script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
 	<script>
+
+	window.onpageshow = function(event) {
+	    this.roomId=localStorage.getItem('wschatroom.roomId');
+	    if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+	    	deleteChatRoom();
+	        
+	    }
+	}
+
+	let deleteChatRoom = async()=>{
+        try{
+            const response = await axios.get("/chatroom/room/exit/"+this.roomId)
+            if(response.data == 0){	//채팅방에 남아있는 사람이 없다면
+               try{
+                   var params = new URLSearchParams();
+                   params.append("name",this.roomId);
+                
+                   const response1= await axios.post("/chatroom/eraseit", params)	//해당채팅방 db가 아닌 서비스에서 관리하는 rooms에서 제거
+                   window.location.href="/chatroom/room"
+               }
+               catch{
+
+               }
+
+            }
+            else{
+                window.location.href="/chatroom/room"
+            }
+        }
+        catch{
+        }
+    }
+
+
+	
     var vm = new Vue({
         el: '#app',
         data: {
@@ -80,8 +120,12 @@
                 } else {
                     var params = new URLSearchParams();
                     params.append("name",this.room_name);
-                 
                     
+                    //여기는 실험용
+                    params.append("maker",'[(${info.userId})]');
+                    
+                    //
+
                     axios.post('/chatroom/room', params)
                     
                         .then(
@@ -98,8 +142,11 @@
                                 	
                                 	console.log("여기까지는 됨2");
                                 	if(sender !== "") {
+                                	
+                                    localStorage.setItem('wschatroom.roomName',response.data.roomName);  
                                     localStorage.setItem('wschatroom.sender',sender);  
-     			                    localStorage.setItem('wschatroom.roomId',roomId);                                  
+     			                    localStorage.setItem('wschatroom.roomId',roomId);
+     			                   	localStorage.setItem('wschatroom.roomMaker',sender); // roomMaker값 넣기 */
                                     window.location.href="/chatroom/room/enter/"+roomId;
                                 }
                             }
@@ -110,5 +157,5 @@
         }
     });
 </script>
-</body>
+</th:block>
 </html>
