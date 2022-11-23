@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>MBTI검사</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<h1>MBTI 검사지</h1>
+<form id="mbtiForm" method="post">
+	#1 가식적인 사람은 불쾌하다.
+	<br>
+	<input name="one" type="checkbox" value="1"
+	onclick="doOpenCheck1(this);">1
+	
+	<input name="one" type="checkbox" value="2"
+	onclick="doOpenCheck1(this);">2
+
+	<input name="one" type="checkbox" value="3"
+	onclick="doOpenCheck1(this);">3
+		<br>	
+	<br>
+	<br>
+	
+	#2 당신은 남들을 도와주려고 하고, 그러느라 자신에게 필요한 것은 잊어버리기도 한다.
+	<br>
+	<input name="two" type="checkbox" value="1"
+		onclick="doOpenCheck2(this);">1
+	
+	<input name="two" type="checkbox" value="2"
+		onclick="doOpenCheck2(this);">2
+
+	<input name="two" type="checkbox" value="3"
+		onclick="doOpenCheck2(this);">3
+		<br>	
+	<br>
+	<br>
+	
+	#3 당신은 남들을 도와준 것이 인정받지 못하면 실망한다.
+	<br>
+	<input name="three" type="checkbox" value="1"
+		onclick="doOpenCheck3(this);">1
+	
+	<input name="three" type="checkbox" value="2"
+		onclick="doOpenCheck3(this);">2
+
+	<input name="three" type="checkbox" value="3"
+		onclick="doOpenCheck3(this);">3
+		<br>	
+	<br>
+	<br>
+	
+	#4 당신은 직설적이고 본론부터 단도직입적으로 얘기한다.
+	<br>
+	<input name="four" type="checkbox" value="1"
+		onclick="doOpenCheck4(this);">1
+	
+	<input name="four" type="checkbox" value="2"
+		onclick="doOpenCheck4(this);">2
+
+	<input name="four" type="checkbox" value="3"
+		onclick="doOpenCheck4(this);">3
+		<br>	
+	<br>
+	<br>
+	
+	#5 당신은 한 주제를 깊이 탐구하고, 깊이 탐구하는 그 자체가 목적이다.
+	<br>
+	<input name="five" type="checkbox" value="1"
+		onclick="doOpenCheck5(this);">1
+	
+	<input name="five" type="checkbox" value="2"
+		onclick="doOpenCheck5(this);">2
+
+	<input name="five" type="checkbox" value="3"
+		onclick="doOpenCheck5(this);">3
+		<br>	
+	<br>
+	<br>
+	
+	#6 당신은 은유를 사용해서 새로운 아이디어를 얘기한다.
+	<br>
+	<input name="six" type="checkbox" value="1"
+		onclick="doOpenCheck6(this);">1
+	
+	<input name="six" type="checkbox" value="2"
+		onclick="doOpenCheck6(this);">2
+
+	<input name="six" type="checkbox" value="3"
+		onclick="doOpenCheck6(this);">3
+		<br>	
+	<br>
+	<br>
+	
+	#7 당신은 작은 디테일에 신경이 쓰이곤 한다.
+	<br>
+	<input name="seven" type="checkbox" value="1"
+		onclick="doOpenCheck7(this);">1
+	
+	<input name="seven" type="checkbox" value="2"
+		onclick="doOpenCheck7(this);">2
+
+	<input name="seven" type="checkbox" value="3"
+		onclick="doOpenCheck7(this);">3
+		<br>	
+	<br>
+	<br>
+	
+	#8 당신은 다른 외부의 기준과는 상관없는 자신만의 내면의 도덕적인 규칙이 있다.
+	<br>
+	<input name="eight" type="checkbox" value="1"
+		onclick="doOpenCheck8(this);">1
+	
+	<input name="eight" type="checkbox" value="2"
+		onclick="doOpenCheck8(this);">2
+
+	<input name="eight" type="checkbox" value="3"
+		onclick="doOpenCheck8(this);">3
+		<br>	
+	<br>
+	<br>
+
+
+	<button type="button" class="btn mt-4" onclick="mbtiTest();">제출하기</button>
+</form>
+	
+
+	<script>
+		function doOpenCheck1(chk) {
+			var obj = document.getElementsByName("one");
+			for (var i = 0; i < obj.length; i++) {
+				if (obj[i] != chk) {
+					obj[i].checked = false;
+				}
+			}
+		}
+		
+		function doOpenCheck2(chk) {
+			var obj = document.getElementsByName("two");
+			for (var i = 0; i < obj.length; i++) {
+				if (obj[i] != chk) {
+					obj[i].checked = false;
+				}
+			}
+		}
+		
+		function doOpenCheck3(chk) {
+			var obj = document.getElementsByName("three");
+			for (var i = 0; i < obj.length; i++) {
+				if (obj[i] != chk) {
+					obj[i].checked = false;
+				}
+			}
+		}
+		
+		function doOpenCheck4(chk) {
+			var obj = document.getElementsByName("four");
+			for (var i = 0; i < obj.length; i++) {
+				if (obj[i] != chk) {
+					obj[i].checked = false;
+				}
+			}
+		}
+		
+		function doOpenCheck5(chk) {
+			var obj = document.getElementsByName("five");
+			for (var i = 0; i < obj.length; i++) {
+				if (obj[i] != chk) {
+					obj[i].checked = false;
+				}
+			}
+		}
+		
+		function doOpenCheck6(chk) {
+			var obj = document.getElementsByName("six");
+			for (var i = 0; i < obj.length; i++) {
+				if (obj[i] != chk) {
+					obj[i].checked = false;
+				}
+			}
+		}
+		
+		function doOpenCheck7(chk) {
+			var obj = document.getElementsByName("seven");
+			for (var i = 0; i < obj.length; i++) {
+				if (obj[i] != chk) {
+					obj[i].checked = false;
+				}
+			}
+		}
+		
+		function doOpenCheck8(chk) {
+			var obj = document.getElementsByName("eight");
+			for (var i = 0; i < obj.length; i++) {
+				if (obj[i] != chk) {
+					obj[i].checked = false;
+				}
+			}
+		}
+		
+		function mbtiTest(){
+			
+			let first = $("input[name='one']:checked").val();
+			let two = $("input[name='two']:checked").val();
+			let three = $("input[name='three']:checked").val();
+			let four = $("input[name='four']:checked").val();
+			let five = $("input[name='five']:checked").val();
+			let six = $("input[name='six']:checked").val();
+			let seven = $("input[name='seven']:checked").val();
+			let eight = $("input[name='eight']:checked").val();
+			let first_piece;
+			let second_piece;
+			let third_piece;
+			let fourth_piece;
+			let master_piece;
+			sessionStorage.setItem("first",first);
+			sessionStorage.setItem("two",two);
+			sessionStorage.setItem("three",three);
+			sessionStorage.setItem("four",four);
+			sessionStorage.setItem("five",five);
+			sessionStorage.setItem("six",six);
+			sessionStorage.setItem("seven",seven);
+			sessionStorage.setItem("eight",eight);
+			
+			if(parseInt(first) + parseInt(two) <=4){
+				first_piece="I";
+			}
+			else{
+				first_piece = "E";
+			}
+			if(parseInt(three) + parseInt(four) <=4){
+				second_piece="S";
+			}
+			else{
+				second_piece="N";
+			}
+			if(parseInt(five) + parseInt(six)<=4){
+				third_piece = "F";
+			}
+			else{
+				third_piece = "T"
+			}
+			if(parseInt(seven) + parseInt(eight)<=4){
+				fourth_piece = "P";
+			}
+			else{
+				fourth_piece = "J";
+			}
+			console.log(first_piece);
+			console.log(second_piece);
+			console.log(third_piece);
+			console.log(fourth_piece);
+			
+			master_piece=first_piece+second_piece+third_piece+fourth_piece;
+			sessionStorage.setItem("master_piece",master_piece); // 최종 결과물
+			console.log(master_piece);
+			alert("잠깐 스톱");
+			location.href = '/register/mbtiResult' ;
+		}
+	</script>
+</body>
+</html>

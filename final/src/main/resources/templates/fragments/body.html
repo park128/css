@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body th:fragment="main-body">
+	
+
+    <div class="fixed-navbar">
+        <div >
+        	<th:block layout:fragment="title"></th:block>              
+        </div>
+        
+    </div>
+
+    <div id="wrapper">
+        <div class="main-content">
+            <div class="row row-inline-block small-spacing">
+                <div class="col-xs-12">
+                    <div class="box-content">
+                        <div class="clearfix">
+                            <h4 class="box-title pull-left"></h4>
+
+                            <th:block layout:fragment="search"></th:block>
+                        </div>
+
+                        <th:block layout:fragment="content"></th:block>
+
+                        <th:block layout:fragment="paging"></th:block>
+                    </div>
+
+                    <th:block layout:fragment="add-content"></th:block>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <ul class="list-inline">
+                    <li>2022 © 존나 어렵넹.</li>
+                </ul>
+            </footer>
+        </div>
+    </div>
+
+    <script th:src="@{/scripts/common.js}"></script>
+    <script th:src="@{/scripts/jquery.min.js}"></script>
+    <script th:src="@{/scripts/main.js}"></script>
+    <script th:src="@{/plugin/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/plugin/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js}"></script>
+
+    <th:block layout:fragment="script"></th:block>
+</body>
+</html>

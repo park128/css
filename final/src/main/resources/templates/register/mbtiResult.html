@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+      <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.js"
+	crossorigin="anonymous"></script>
+      <py-config type="json">
+        {
+          "packages": ["numpy", "matplotlib","pandas"]
+        }
+      </py-config>
+    </head>
+
+  <body>
+    <h1>검사 결과</h1>
+    <div id="plot"></div>
+    <button type="button" class="btn mt-4" onclick="goBack();">확인</button>
+        <script>
+     	first = window.sessionStorage.getItem('first');
+     	two = window.sessionStorage.getItem('two');
+     	three = window.sessionStorage.getItem('three');
+     	four = window.sessionStorage.getItem('four');
+     	five = window.sessionStorage.getItem('five');
+     	six = window.sessionStorage.getItem('six');
+     	seven = window.sessionStorage.getItem('seven');
+     	eight = window.sessionStorage.getItem('eight');       	
+     	master_piece = window.sessionStorage.getItem("master_piece");
+    </script>
+    <py-script output="plot">
+from js import first,two,three,four,five,six,seven,eight,master_piece,console
+
+console.log(first)
+console.log(two)
+console.log(master_piece);
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+fig=plt.figure()
+df = pd.DataFrame({'MBTI' :['E&I','S&N','T&F','J&P'],'A' : [int(first)*10,int(two)*10,int(three)*10,int(four)*10], 'B' : [int(five)*10,int(six)*10,int(seven)*10,int(eight)*10]})
+ 
+
+
+df['total'] = df['A'] + df['B']
+df['A_percent'] = round(df['A'] / df['total'] * 100, 1)
+df['B_percent'] = round(df['B']/ df['total']*100, 1)
+
+
+fig, ax = plt.subplots(figsize=(10,8))
+
+# bar 그리기
+ax.barh(df['MBTI'], -df['A'], color = 'r')
+ax.barh(df['MBTI'], df['B'], color = 'b')
+
+# 역순으로 표시
+plt.gca().invert_yaxis()
+
+plt.yticks(df['MBTI'])
+
+plt.xticks([-100,-50,0,50,100],('100','50','0','50','100'))
+
+plt.ylabel('MBTI')
+plt.xlabel('PERCENT')
+
+#plt.xlim([-100,100])
+#택스트 지정
+
+ax.text(-85, df['MBTI'][0],'E '+ str(df['A_percent'][0]) + '%', fontsize = 20,  color = 'black', fontweight='bold')
+ax.text(60, df['MBTI'][0], 'I '+str(df['B_percent'][0]) + '%', fontsize = 20,  color = 'black', fontweight='bold')
+
+ax.text(-85, df['MBTI'][1],'S '+ str(df['A_percent'][1]) + '%', fontsize = 20, color = 'black', fontweight='bold')
+ax.text(60, df['MBTI'][1], 'N '+str(df['B_percent'][1]) + '%', fontsize = 20,  color = 'black', fontweight='bold')
+
+ax.text(-85, df['MBTI'][2],'T '+ str(df['A_percent'][2]) + '%', fontsize = 20,  color = 'black', fontweight='bold')
+ax.text(60, df['MBTI'][2], 'F '+str(df['B_percent'][2]) + '%', fontsize = 20,  color = 'black', fontweight='bold')
+
+ax.text(-85, df['MBTI'][3],'J '+ str(df['A_percent'][3]) + '%', fontsize = 20,  color = 'black', fontweight='bold')
+ax.text(60, df['MBTI'][3], 'P '+str(df['B_percent'][3]) + '%', fontsize = 20,  color = 'black', fontweight='bold')
+
+
+fig
+    </py-script>
+<script>
+	function goBack(){
+		location.href = '/register/finalLogin' ;
+	}
+</script>
+  </body>
+</html>

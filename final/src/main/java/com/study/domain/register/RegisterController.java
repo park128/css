@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@SessionAttributes("info")
+@SessionAttributes("info") // 로그인시 저장한 값을 불러오는데 사용
 @RequiredArgsConstructor
 public class RegisterController {
 	private final RegisterService registerService;
@@ -24,12 +24,6 @@ public class RegisterController {
 	public String mainPage() throws Exception {
 		return "register/main";
 	}
-	
-	// 들어간 이후 첫 페이지
-		@GetMapping("/register/hi")
-		public String mainPage1() throws Exception {
-			return "register/hi";
-		}
 
 	// 로그인 정보를 받고 그 다음 단계로 넘어가기 위한 중간단계
 	@PostMapping("/register/loginVerify")
@@ -68,17 +62,7 @@ public class RegisterController {
 		return "redirect:/register/finalLogin";
 	}
 
-	// 로그인 이후 들어갈 화면
-	@GetMapping("/register/secondMain")
-	public String secondMain() throws Exception {
-		return "register/secondMain";
-	}
-
-	@GetMapping("/register/first")
-	public String openRegisterpage2() throws Exception {
-		return "register/first";
-	}
-
+	//마이페이지
 	@GetMapping("/register/mypage")
 	public String openmypage() throws Exception {
 
@@ -98,38 +82,21 @@ public class RegisterController {
 		return "register/rename";
 	}
 
-	// 회원가입페이지
-	@GetMapping("/register/register")
-	public String openRegisterpage() {
-		// 어차피 그냥 회원가입 페이지니까 아무것도 받을 필요가 없지
-		return "register/register";
-	}
-
-	// 로그인 페이지
-	@GetMapping("/register/login")
-	public String openLoginpage() {
-		// 그냥 로그인 페이지로 갔을 때
-		return "register/login";
-	}
-
-	// 아이디와 비밀번호가 맞는지
-
-	// integer를 반환받는 방식으로 로그인 자체만을 구현하기 위한 것.
-	@PostMapping("/register/confirm")
-	public String loginsuccess(final RegisterRequest params) {
-
-		if (registerService.loginconfirm(params) == 1) {
-			return "redirect:/post/list";
-		}
-		return "redirect:/register/loginfail";
-	}
-
 	// 아이디중복검사용
 	@PostMapping("/register/checkid")
 	@ResponseBody
 	public int idCheck(final RegisterRequest params) {
 
 		int cnt = registerService.idconfig(params);
+		System.out.println(cnt);
+		return cnt;
+	}
+	
+	// 닉네임 중복 검사용
+	@PostMapping("/register/checkName")
+	@ResponseBody
+	public int nameCheck(final RegisterRequest params) {
+		int cnt = registerService.nameCheck(params);
 		System.out.println(cnt);
 		return cnt;
 	}
@@ -169,5 +136,18 @@ public class RegisterController {
 			return 0;
 		}
 	}
+	
+	
+	// mbtiTest 페이지
+		@GetMapping("/register/mbtiTest")
+		public String mbtiTest() throws Exception {
+			return "register/mbtiTest";
+		}
+		
+	// mbtiResult 페이지
+		@GetMapping("/register/mbtiResult")
+		public String mbtiResult() throws Exception {
+			return "register/mbtiResult";
+		}
 
 }

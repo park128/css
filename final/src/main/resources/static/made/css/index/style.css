@@ -376,19 +376,15 @@ button {
 }
 
 .main-credits {
-  font-size: 40px;
+  font-size: 44px;
   position: absolute;
   transform: rotate(-17deg);
   background-color: #fe9c3e;
   top: 5vh;
-  left: 41vw;
+  left: 39vw;
   margin-top: 250px;
   margin-left: -325px;
-  padding: 65px;
-  padding-top: 110px;
-  padding-bottom: 110px;
-  -webkit-padding-start: 20px;
-          padding-inline-start: 20px;
+  padding: 30px 105px 115px 60px ;
   border-radius: 100%;
   align-items: center;
   opacity: 0;

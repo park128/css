@@ -17,8 +17,6 @@ public interface RegisterMapper {
     RegisterResponse findByuserno(Integer userNo);
     
     
-    int login(RegisterRequest params);
-    
     //처음 로그인할 때 로그인 검증 용도
 	RegisterResponse loginVerify(RegisterRequest params); 
 	
@@ -29,6 +27,11 @@ public interface RegisterMapper {
      */
 	int idconfig(RegisterRequest params);
 	
+	/**
+     * 닉네임 중복 확인용
+     * @param params - 회원 정보
+     */
+	int nameCheck(RegisterRequest params);
 	
 	//아이디와 비밀번호 입력하고 삭제
 	int delete(RegisterRequest params);

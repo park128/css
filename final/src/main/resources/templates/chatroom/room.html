@@ -7,91 +7,24 @@
 
 <!-- header에서 들고온 link -->
 <link rel="stylesheet" th:href="@{/css/style.css}" />
-<link rel="stylesheet" th:href="@{/made/css/chatting/chatting.css}" />
-<link rel="stylesheet" th:href="@{/made/css/chatting/chatting_a.css}" />
 <link rel="stylesheet"
 	th:href="@{/plugin/mCustomScrollbar/jquery.mCustomScrollbar.min.css}" />
 
 </head>
-<body> 
 
 
-    <div class="cursor">
-        <div class="text">MBTI</div>
-        <div class="text">MBTI</div>
-        <div class="text">MBTI</div>
-        <div class="text">MBTI</div>
-        <div class="text"><span>MBTI</span></div>
-    </div>
-
-    <div class="night">
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-    </div>
-    <div class="header">
-        <div id="header-time">
-            
-        </div>
-        <div class="header-logo">
-            <img src="/made/img/main.png" alt="Logo" width="100px" height="80px">
-        </div>
-        <button class="close">
-            <div class="top_menu">
-                <span class="menu">menu</span>
-            </div>
-            <div class="hamburger">
-                <input type="checkbox">
-                <div class="hamburgerlines">
-                    <span class="lines line1">
-        
-                    </span>
-                    <span class="lines line2">
-        
-                    </span>
-                    <span class="lines line3">
-        
-                    </span>
-                </div>
-                <ul class="menu-items">
-                    <li>내 정보</li>
-                    <li>MBTI 검사</li>
-                    <li>쇼핑몰</li>
-                    <li>내 게시물</li>
-                    <li><a href="#" onclick="location.href='../html/login.html'">Log Out</a></li>
-                    </ul>
-                </div>
-        </button>
-    </div>
 
 
-    <div class="social-menu">
-        <ul>
-            <li><a href="#" onclick="location.href='/mbti/html/index.html'" target="blank"><i></i></a></li>
-            <li><a href="#" onclick="location.href='/mbti/html/chatting.html'" target="blank"><i></i></a></li>
-            <li><a href="#" onclick="location.href='/mbti/html/Healing.html'" target="blank"><i></i></a></li>
-            <li><a href="#" onclick="location.href='/mbti/html/BulletinBoard.html'" target="blank"><i></i></a></li>
-        </ul>
-    </div>
 
-<!-- css 적용한 것 -->
+<body>
+
+	<div class="fixed-navbar">
+		<div>
+			<th:block layout:fragment="title">
+			MBTI 채팅방
+			</th:block>
+		</div>
+	</div>
 
 	<!-- 위에는 파란색 대가리 부분을 의미한다!     -->
 
@@ -230,20 +163,6 @@
         }
     });
 </script>
-
-
-    <div class="social-menu">
-        <ul>
-            <li><a href="#" onclick="location.href='/mbti/html/index.html'" target="blank"><i></i></a></li>
-            <li><a href="#" onclick="location.href='/mbti/html/chatting.html'" target="blank"><i></i></a></li>
-            <li><a href="#" onclick="location.href='/mbti/html/Healing.html'" target="blank"><i></i></a></li>
-            <li><a href="#" onclick="location.href='/mbti/html/BulletinBoard.html'" target="blank"><i></i></a></li>
-        </ul>
-    </div>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
-	<script src="/made/js/chatting/chatting.js"></script>
 </body>
 </html>
 

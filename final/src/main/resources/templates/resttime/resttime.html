@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>rotating stars</title>
+  <link rel="stylesheet" href="/made/css/Healing/style.css">
+  <link rel="stylesheet" href="/made/css/Healing/Healing.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+
+  <style>
+    /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+    body {
+      background: radial-gradient(200% 100% at bottom center, #f7f7b6, #e96f92, #75517d, #1b2947);
+      background: radial-gradient(220% 105% at top center, #1b2947 10%, #75517d 40%, #e96f92 65%, #f7f7b6);
+      background-attachment: fixed;
+      overflow: hidden;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(0);
+      }
+
+      100% {
+        transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(-360deg);
+      }
+    }
+
+    .stars {
+      transform: perspective(500px);
+      transform-style: preserve-3d;
+      position: absolute;
+      bottom: 0;
+      perspective-origin: 50% 100%;
+      left: 50%;
+      animation: rotate 90s infinite linear;
+    }
+
+    .star {
+      width: 2px;
+      height: 2px;
+      background: #F7F7B6;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: 0 0 -300px;
+      transform: translate3d(0, 0, -300px);
+      backface-visibility: hidden;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+</head>
+
+<body>
+
+  <div class="stars">
+
+  </div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+  <th:block th:if="${info.userMbti  == 'ISFP'}">
+	  <div class="card">
+	    <div class="front"  style='background-image: url("http://localhost:8080/made/img/card.png");'></div>
+	    <div class="back"></div>
+	  </div>
+	  <div class="card" >
+	    <div class="front" style='background-image: url("http://localhost:8080/made/img/card1.png");'></div>
+	    <div class="back"></div>
+	  </div>
+	  <div class="card">
+	    <div class="front" style='background-image: url("http://localhost:8080/made/img/card2.png");'></div>
+	    <div class="back"></div>
+	  </div>
+  </th:block>
+  <!-- <th:block>
+	  <div th:if="${info.userMbti == 'ESFP' } or ${info.userMbti  == 'ENTJ'}">
+	  	<div class="card">
+	    <div class="front"  style='background-image: url("http://localhost:8080/made/img/card3.png");'></div>
+	    <div class="back"></div>
+	  </div>
+	  <div class="card" >
+	    <div class="front" style='background-image: url("http://localhost:8080/made/img/card4.png");'></div>
+	    <div class="back"></div>
+	  </div>
+	  <div class="card">
+	    <div class="front" style='background-image: url("http://localhost:8080/made/img/card5.png");'></div>
+	    <div class="back"></div>
+	  </div>
+	  </div>
+  </th:block> -->
+
+  <div class="header">
+    <div id="header-time">
+
+    </div>
+    <div class="header-logo">
+      <img src="/made/img/KakaoTalk_20221102_003617932.png" alt="Logo" width="100px" height="80px">
+    </div>
+    <button class="close">
+      <div class="top_menu">
+        <span class="menu">menu</span>
+      </div>
+      <div class="hamburger">
+        <input type="checkbox">
+        <div class="hamburgerlines">
+          <span class="lines line1">
+
+          </span>
+          <span class="lines line2">
+
+          </span>
+          <span class="lines line3">
+
+          </span>
+        </div>
+        <ul class="menu-items">
+          <li>내 정보</li>
+          <li>MBTI 검사</li>
+          <li>쇼핑몰</li>
+          <li>내 게시물</li>
+          <li><a href="#" onclick="location.href='../html/login.html'">Log Out</a></li>
+        </ul>
+      </div>
+    </button>
+  </div>
+
+  <div class="resttime">
+    <img src="" alt="이미지">
+    <div id="text">
+      수면 30분 전 집안을 어둡게, 그리고 누워서 음악을 감상하시는 건 어떠세요?
+      잠을 잘기 전에 빛을 100% 차단하는 암막 커튼 치고 잔잔한 클래식 음악을 들으면서 수면을 취하시는 건 어떠시나요?
+    </div>
+    <img src="../img/back-button.png" id="toBack" alt="">
+  </div>
+
+
+  <div class="social-menu">
+    <ul>
+      <li><a href="#" onclick="location.href='/mbti/html/index.html'" target="blank"><i></i></a></li>
+      <li><a href="#" onclick="location.href='/mbti/html/chatting.html'" target="blank"><i></i></a></li>
+      <li><a href="#" onclick="location.href='/mbti/html/Healing.html'" target="blank"><i></i></a></li>
+      <li><a href="#" onclick="location.href='/mbti/html/BulletinBoard.html'" target="blank"><i></i></a></li>
+    </ul>
+  </div>
+</body>
+
+
+
+<script src="/made/js/resttime/resttime.js"></script>
+</html>

@@ -40,8 +40,12 @@
 		
 		<!-- v-for문을 그냥 사용하여 채팅을 하면 새로운 채팅이 위에 나타난다. 이를 해결하기 위해 v-for문을 역순으로 출력되게 해야하는데
 		이때 출력하고자 하는 배열에.slice().reverse()를 붙이면 정상적으로 출력이 된다. -->
-		
-			<li class="list-group-item" v-for="message in messages.slice().reverse()" >
+		<!-- 여기서 만약에 방 만든 사람과 채팅을 입력하는 사람이 같다면 오른쪽 그게 아니라면 왼쪽 -->
+			<li th:if="${info?.userId=='kevin'}"style="text-align:right;"class="list-group-item" v-for="message in messages.slice().reverse()" >
+				{{message.sender}} : {{message.message}}
+			</li>
+			
+			<li th:if="!${info?.userId=='kevin'}"class="list-group-item" v-for="message in messages.slice().reverse()" >
 				{{message.sender}} : {{message.message}}
 			</li>
 
@@ -50,6 +54,7 @@
 		
 		
 		<div>
+			
 			
 		<div class="input-group">
 

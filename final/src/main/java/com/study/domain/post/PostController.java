@@ -1,5 +1,7 @@
 package com.study.domain.post;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -11,11 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.study.common.dto.MessageDto;
 import com.study.common.dto.SearchDto;
+import com.study.domain.register.RegisterRequest;
 import com.study.domain.register.RegisterResponse;
 import com.study.paging.PagingResponse;
 
@@ -45,41 +49,28 @@ public class PostController {
         MessageDto message = new MessageDto("게시글 생성이 완료되었습니다.", "/post/list", RequestMethod.GET, null);
         return showMessageAndRedirect(message, model);
     }
-    // 게시글 리스트 페이지
-	
-	
-	
-	/*
-	 * @GetMapping("/post/list.do") public String openPostList(Model model) {
-	 * List<PostResponse> posts = postService.findAllPost();
-	 * model.addAttribute("posts", posts); return "post/list";
-	 * 
-	 * 
-	 * }
-	 */
 
     // 게시글 리스트 페이지
     @GetMapping("/post/list")
     public String openPostList(@ModelAttribute("params") final SearchDto params, Model model) {
-    	PagingResponse<PostResponse> response = postService.findAllPost(params);
-        model.addAttribute("response", response);
+    	PagingResponse<PostResponse> response = postService.findAllPost(params);   	   	
+        model.addAttribute("response", response);     
         return "post/list";
     }
+	  	  
 	  
-	  
-	  
-	  @GetMapping("/register/hihi") public void
-	  asdfsdf(@SessionAttribute(name="info",required=false)RegisterResponse info,Model model) { 
-		  model.addAttribute("info",info); }
-	 
-	 
-	 
-    
     // 게시글 상세 페이지
     @GetMapping("/post/view")
     public String openPostView(@RequestParam final Long id, Model model) {
         PostResponse post = postService.findPostById(id);
-        model.addAttribute("post", post);
+		 List<PostResponse> commentPost = postService.findallComment(id);
+		 System.out.println("글상세보기 컨트롤러에서 받아온 댓글 리스트");
+		 for (int i = 0; i < commentPost.size(); i++) {
+			 System.out.println(commentPost.get(i));
+		 }
+		 model.addAttribute("post", post);
+		 model.addAttribute("commentPost",commentPost); 
+        
         return "post/view";
     }
     
@@ -91,10 +82,10 @@ public class PostController {
         return showMessageAndRedirect(message, model);
     }
     
-    
+    //로그아웃
     @GetMapping("/post/logout")
     	public String logout(HttpSession session) {
-    		session.invalidate();
+    		session.invalidate(); //session.invalidate()를 통해 session안에 있던 정보 삭제
     		return "register/login";
     }
     
@@ -114,6 +105,28 @@ public class PostController {
         model.addAttribute("params", params);
         return "common/messageRedirect";
     }
+    
+    
+ 	//댓글 추가
+ 	@PostMapping("/post/comment")
+ 	@ResponseBody
+ 	public int commentRegister(final PostRequest params) {
+ 		int cnt = postService.commentRegister(params); // postService에 있는 commentRegister 함수를 실행
+ 		System.out.println(cnt); //제대로 쿼리를 통해 값을 받아오고 있는지 확인
+ 		return cnt;
+ 	}
+ 	
+ 	//댓글 삭제
+ 	@PostMapping("/post/commentDelete")
+ 	@ResponseBody
+ 	public int commentDelete(final PostRequest params) {
+ 		System.out.println("컨트롤러 실행완료");
+ 		int cnt = postService.commentDelete(params); 
+ 		return cnt;
+ 	}
+ 	
+ 	
+ 	
     
 
 }

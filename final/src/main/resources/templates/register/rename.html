@@ -66,7 +66,8 @@
                  success:function(outcome){//성공하면 해당 함수를 실행한다.
                      console.log(outcome); // 받아온 값이 무엇인지 확인(값을 제대로 받고 있는지 확인용)
                      if(outcome == 1){ // 내가 받아온 값이 1이라면, 즉 db에 이미 해당 아이디가 존재한다면
-                        alert("닉네임 변경이 완료되었습니다");
+                        alert("닉네임 변경이 완료되었습니다. 다시 로그인 해주세요");
+                        window.location="/register/logout";
                      }else{
                     	
                    	  	alert("실패1");

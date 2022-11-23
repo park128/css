@@ -14,7 +14,6 @@ public class ChatMessage {
         ENTER, TALK, QUIT
     }
 	
-
     private MessageType type;
     //채팅방 ID
     private String roomId;

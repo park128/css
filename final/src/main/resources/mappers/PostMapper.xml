@@ -3,134 +3,184 @@
 
 <mapper namespace="com.study.domain.post.PostMapper">
 
-    <!-- tb_post 테이블 전체 컬럼 -->
-    <sql id="postColumns">
-          id
-        , title
-        , content
-        , writer
-        , view_cnt
-        , notice_yn
-        , delete_yn
-        , created_date
-        , modified_date
-    </sql>
+	<!-- tb_post 테이블 전체 컬럼 -->
+	<sql id="postColumns">
+		id
+		, title
+		, content
+		, writer
+		, view_cnt
+		, notice_yn
+		, delete_yn
+		, created_date
+		, modified_date
+	</sql>
+
+	<!-- tb_comment 테이블 전체 컬럼 -->
+	<sql id="commentColumns">
+		commentIdentifier,
+		commentId,
+		commentWriter,
+		comment,
+		commentDate
+	</sql>
 
 
-    <!-- 게시글 저장 -->
-    <insert id="save" parameterType="com.study.domain.post.PostRequest" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO tb_post (
-            <include refid="postColumns" />
-        ) VALUES (
-              #{id}
-            , #{title}
-            , #{content}
-            , #{writer}
-            , 0
-            , #{noticeYn}
-            , 0
-            , NOW()
-            , NULL
-        )
-    </insert>
+	<!-- 게시글 저장 -->
+	<insert id="save"
+		parameterType="com.study.domain.post.PostRequest"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_post (
+		<include refid="postColumns" />
+		) VALUES (
+		#{id}
+		, #{title}
+		, #{content}
+		, #{writer}
+		, 0
+		, #{noticeYn}
+		, 0
+		, NOW()
+		, NULL
+		)
+	</insert>
 
 
-    <!-- 게시글 상세정보 조회 -->
-    <select id="findById" parameterType="long" resultType="com.study.domain.post.PostResponse">
-        SELECT
-            <include refid="postColumns" />
-        FROM
-            tb_post
-        WHERE
-            id = #{value}
-    </select>
+	<!-- 게시글 상세정보 조회 -->
+	<select id="findById" parameterType="long"
+		resultType="com.study.domain.post.PostResponse">
+		SELECT
+		<include refid="postColumns" />
+		FROM
+		tb_post
+		WHERE
+		id = #{value}
+	</select>
 
 
-    <!-- 게시글 수정 -->
-    <update id="update" parameterType="com.study.domain.post.PostRequest">
-        UPDATE tb_post
-        SET
-              modified_date = NOW()
-            , title = #{title}
-            , content = #{content}
-            , writer = #{writer}
-            , notice_yn = #{noticeYn}
-        WHERE
-            id = #{id}
-    </update>
+	<!-- 게시글 수정 -->
+	<update id="update"
+		parameterType="com.study.domain.post.PostRequest">
+		UPDATE tb_post
+		SET
+		modified_date = NOW()
+		, title = #{title}
+		, content = #{content}
+		, writer = #{writer}
+		, notice_yn = #{noticeYn}
+		WHERE
+		id = #{id}
+	</update>
 
 
-    <!-- 게시글 삭제 -->
-    <delete id="deleteById" parameterType="long">
-        UPDATE tb_post
-        SET
-            delete_yn = 1
-        WHERE
-            id = #{id}
-    </delete>
+	<!-- 게시글 삭제 -->
+	<delete id="deleteById" parameterType="long">
+		UPDATE tb_post
+		SET
+		delete_yn = 1
+		WHERE
+		id = #{id}
+	</delete>
 
 
-    <!-- 게시글 리스트 조회 -->
-    <select id="findAll" parameterType="com.study.common.dto.SearchDto" resultType="com.study.domain.post.PostResponse">
-        SELECT
-            <include refid="postColumns" />
-        FROM
-            tb_post
-        WHERE
-            delete_yn = 0
-            <include refid="search" />
-        ORDER BY
-            id DESC
-        LIMIT #{pagination.limitStart}, #{recordSize}
-    </select>
-    
-    <!-- 게시글 수 카운팅 -->
-    <select id="count" parameterType="com.study.common.dto.SearchDto" resultType="int">
-        SELECT
-            COUNT(*)
-        FROM
-            tb_post
-        WHERE
-            delete_yn = 0
-            <include refid="search" />
-    </select>
-    
-        <!-- 게시글 상세조회하면 조회수 1증가 -->
-    <update id="viewCount" parameterType="long">
-    	UPDATE tb_post
-		   SET view_cnt =  view_cnt+1
-		 WHERE id=#{id}
-    </update>
-    
-      <!-- 게시글 검색 -->
-    <sql id="search">
-        <!-- 검색 키워드가 있을 때 -->
-        <if test="keyword != null and keyword != ''">
-            <choose>
-                <!-- 검색 유형이 있을 때 -->
-                <when test="searchType != null and searchType != ''">
-                    <choose>
-                        <when test="'title'.equals( searchType )">
-                            AND title LIKE CONCAT('%', #{keyword}, '%')
-                        </when>
-                        <when test="'content'.equals( searchType )">
-                            AND content LIKE CONCAT('%', #{keyword}, '%')
-                        </when>
-                        <when test="'writer'.equals( searchType )">
-                            AND writer LIKE CONCAT('%', #{keyword}, '%')
-                        </when>
-                    </choose>
-                </when>
-                <!-- 전체 검색일 때 때 -->
-                <otherwise>
-                    AND (
-                           title LIKE CONCAT('%', #{keyword}, '%')
-                        OR content LIKE CONCAT('%', #{keyword}, '%')
-                        OR writer LIKE CONCAT('%', #{keyword}, '%')
-                    )
-                </otherwise>
-            </choose>
-        </if>
-    </sql>
+	<!-- 게시글 리스트 조회 -->
+	<select id="findAll"
+		parameterType="com.study.common.dto.SearchDto"
+		resultType="com.study.domain.post.PostResponse">
+		SELECT
+		<include refid="postColumns" />
+		FROM
+		tb_post
+		WHERE
+		delete_yn = 0
+		<include refid="search" />
+		ORDER BY
+		id DESC
+		LIMIT #{pagination.limitStart}, #{recordSize}
+	</select>
+
+	<!-- 게시글 수 카운팅 -->
+	<select id="count"
+		parameterType="com.study.common.dto.SearchDto" resultType="int">
+		SELECT
+		COUNT(*)
+		FROM
+		tb_post
+		WHERE
+		delete_yn = 0
+		<include refid="search" />
+	</select>
+
+	<!-- 게시글 상세조회하면 조회수 1증가 -->
+	<update id="viewCount" parameterType="long">
+		UPDATE tb_post
+		SET view_cnt = view_cnt+1
+		WHERE id=#{id}
+	</update>
+
+	<!-- 게시글 검색 -->
+	<sql id="search">
+		<!-- 검색 키워드가 있을 때 -->
+		<if test="keyword != null and keyword != ''">
+			<choose>
+				<!-- 검색 유형이 있을 때 -->
+				<when test="searchType != null and searchType != ''">
+					<choose>
+						<when test="'title'.equals( searchType )">
+							AND title LIKE CONCAT('%', #{keyword}, '%')
+						</when>
+						<when test="'content'.equals( searchType )">
+							AND content LIKE CONCAT('%', #{keyword}, '%')
+						</when>
+						<when test="'writer'.equals( searchType )">
+							AND writer LIKE CONCAT('%', #{keyword}, '%')
+						</when>
+					</choose>
+				</when>
+				<!-- 전체 검색일 때 때 -->
+				<otherwise>
+					AND (
+					title LIKE CONCAT('%', #{keyword}, '%')
+					OR content LIKE CONCAT('%', #{keyword}, '%')
+					OR writer LIKE CONCAT('%', #{keyword}, '%')
+					)
+				</otherwise>
+			</choose>
+		</if>
+	</sql>
+
+
+	<!-- 댓글 저장 -->
+	<insert id="commentRegister" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_comment (
+		<include refid="commentColumns" />
+		) VALUES (
+		#{commentIdentifier},
+		#{commentId},
+		#{commentWriter}
+		, #{comment}
+		, NOW()
+		)
+	</insert>
+		
+	<!-- 댓글 리스트 조회 -->
+	<select id="findallComment" parameterType="long" resultType="com.study.domain.post.PostResponse">
+		SELECT
+		<include refid="commentColumns" />
+		FROM
+		tb_comment
+		WHERE
+		commentId = #{value}
+	</select>
+	
+	
+	<!-- 게시글 삭제 -->
+	<delete id="commentDelete">
+		DELETE
+		FROM
+		tb_comment
+		WHERE commentId = #{commentId}
+		AND commentIdentifier = #{commentIdentifier}
+	</delete>
 
 </mapper>

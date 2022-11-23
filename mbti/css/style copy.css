@@ -1,0 +1,453 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&family=Rock+Salt&display=swap");
+@import url("hover-min.css");
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  padding: 0;
+}
+
+body {
+  background-color: #141441;
+  color: white;
+  font-family: "Playfair Display", serif;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.header {
+  width: 100%;
+}
+
+#header-time {
+  font-size: 18px;
+  color: white;
+  top: 56px;
+  left: 104px;
+  width: auto;
+  height: 30px;
+  position: absolute;
+  display: inline-block;
+}
+
+.header-logo {
+  font-size: 25px;
+  top: 40px;
+  right: 43vw;
+  position: absolute;
+  text-align: center;
+  display: inline-block;
+}
+
+button {
+  font-size: 13px;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  border-radius: 50px;
+  display: inline-block;
+  position: absolute;
+  top: 44px;
+  right: 32px;
+  height: 41px;
+  width: 128px;
+}
+
+@-webkit-keyframes move1 {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.2) rotate(-10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes move1 {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.2) rotate(-10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes scale-out-chat {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+@keyframes scale-out-chat {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes move2 {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+    visibility: visible;
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.2) rotate(27deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(17deg);
+  }
+}
+@keyframes move2 {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+    visibility: visible;
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.2) rotate(27deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(17deg);
+  }
+}
+@-webkit-keyframes scale-out-rest {
+  0% {
+    transform: scale(1) rotate(17deg);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+@keyframes scale-out-rest {
+  0% {
+    transform: scale(1) rotate(17deg);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes move3 {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.15) rotate(-27deg);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes move3 {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.15) rotate(-27deg);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes scale-out-credits {
+  0% {
+    transform: scale(1) rotate(-17deg);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+@keyframes scale-out-credits {
+  0% {
+    transform: scale(1) rotate(-17deg);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes move4 {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.15) rotate(10deg);
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes move4 {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.15) rotate(10deg);
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes scale-out-notice {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+@keyframes scale-out-notice {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+.main {
+  background-color: cornflowerblue;
+  width: 80%;
+  position: relative;
+  left: 10%;
+  top: 160px;
+  font-family: "Playfair Display", serif;
+  font-family: "Rock Salt", cursive;
+  font-size: 80px;
+}
+
+.main-chat {
+  width: auto;
+  height: auto;
+  position: absolute;
+  display: inline-block;
+  background-color: #495950;
+  top: 5vh;
+  left: 41vw;
+  margin-left: -450px;
+  padding-left: 45px;
+  padding-right: 140px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 100px;
+  -webkit-animation: move1 1.5s;
+          animation: move1 1.5s;
+  -webkit-animation-timing-function: cubic-bezier(1, 0.8, 0.8);
+          animation-timing-function: cubic-bezier(1, 0.8, 0.8);
+}
+.main-chat:hover {
+  transform: scale(1.15) rotate(-10deg);
+  transition: 0.2s;
+}
+.main-chat:not(:hover) {
+  transform: scale(1);
+  transition: 0.2s;
+}
+
+.main-resttime {
+  width: auto;
+  height: auto;
+  font-size: 60px;
+  line-height: 1.4;
+  position: absolute;
+  display: inline-block;
+  transform: rotate(17deg);
+  background-color: #114469;
+  top: 5vh;
+  left: 41vw;
+  padding-left: 45px;
+  padding-right: 120px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-radius: 70px;
+  opacity: 0;
+  -webkit-animation: move2 1.5s;
+          animation: move2 1.5s;
+  -webkit-animation-timing-function: cubic-bezier(1, 0.8, 0.8);
+          animation-timing-function: cubic-bezier(1, 0.8, 0.8);
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+.main-resttime:hover {
+  transform: scale(1.15) rotate(27deg);
+  transition: 0.2s;
+}
+.main-resttime:not(:hover) {
+  transform: scale(1) rotate(17deg);
+  transition: 0.2s;
+}
+
+.main-credits {
+  font-size: 40px;
+  position: absolute;
+  transform: rotate(-17deg);
+  background-color: #fe9c3e;
+  top: 5vh;
+  left: 41vw;
+  margin-top: 250px;
+  margin-left: -325px;
+  padding: 65px;
+  padding-top: 110px;
+  padding-bottom: 110px;
+  -webkit-padding-start: 20px;
+          padding-inline-start: 20px;
+  border-radius: 100%;
+  align-items: center;
+  opacity: 0;
+  -webkit-animation: move3 1.5s;
+          animation: move3 1.5s;
+  -webkit-animation-timing-function: cubic-bezier(1, 0.8, 0.8);
+          animation-timing-function: cubic-bezier(1, 0.8, 0.8);
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+}
+.main-credits:hover {
+  transform: scale(1.1) rotate(-27deg);
+  transition: 0.2s;
+}
+.main-credits:not(:hover) {
+  transform: scale(1) rotate(-17deg);
+  transition: 0.2s;
+}
+
+.main-noticeBoard {
+  font-size: 60px;
+  line-height: 1.4;
+  position: absolute;
+  background-color: #db5551;
+  top: 5vh;
+  left: 41vw;
+  margin-top: 270px;
+  margin-left: 10px;
+  padding: 30px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  border-radius: 30px 100px 30px 30px;
+  opacity: 0;
+  -webkit-animation: move4 1.5s;
+          animation: move4 1.5s;
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+}
+.main-noticeBoard:hover {
+  transform: scale(1.1) rotate(10deg);
+  transition: 0.2s;
+}
+.main-noticeBoard:not(:hover) {
+  transform: scale(1);
+  transition: 0.2s;
+}
+
+.right-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: auto;
+  left: 100%;
+  bottom: auto;
+  right: auto;
+  background: #6c567b;
+  transition: all 0.9s cubic-bezier(0.6, 0.05, 0.4, 1);
+}
+
+.right-layer.active {
+  left: -100%;
+}
+
+.right-layer--2 {
+  background: #393e46;
+  transition-delay: 0.6s;
+}
+
+.right-layer--3 {
+  background: #6c5b7b;
+  transition-delay: 0.4s;
+}
+
+.right-layer--4 {
+  background: #c06c84;
+  transition-delay: 0.2s;
+}
+
+.right-layer--5 {
+  background: #f67280;
+  transition-delay: 0.1s;
+}/*# sourceMappingURL=style copy.css.map */

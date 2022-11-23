@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layout/basic">
+   layout:decorate="layout/basic">
 <head>
     <!-- BootStrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -11,9 +11,10 @@
 <body>
 
 <th:block layout:fragment="title">
-	<h1 class="page-title">		
-		<span th:text="${count}+명이채팅에참여하고있습니다"></span>
-	</h1>
+   <h1 id="totalNumParent" class="page-title">      
+   	 <span id="totalNum" th:text="|${count}명이 채팅에 참여하고 있습니다|"></span>
+       <!-- 문자열에 변수 함께 사용-->     
+   </h1>
 </th:block>
 
 
@@ -37,8 +38,8 @@
                         <div class="input-group mb-3">
                             <input type="text" id="msg" class="form-control m-1" size=150% maxlength=50>
                             <button class="btn btn-outline-secondary m-1"  type="button" id="button_send">전송</button>
-                            <!-- <button class="btn btn-outline-secondary m-1" type="button" id="disconn">퇴장하기</button> -->
                             
+                            <!-- <button class="btn btn-outline-secondary m-1" type="button" id="disconn">퇴장하기</button> -->      
                         </div>
                     </div>
                 </div>
@@ -62,8 +63,10 @@
     crossorigin="anonymous"></script>
 <script th:inline="javascript">
     /*<![CDATA[*/
+       /* DOMContentLoaded 이벤트는 초기 HTML 문서를 완전히 불러오고 분석했을 때 발생합니다. 스타일 시트, 이미지, 하위 프레임의 로딩은 기다리지 않습니다. */
     document.addEventListener('DOMContentLoaded', function () {
-        const username = /*[[${info.userName}]]*/
+       let usernum=/*[[${count}]]*/null;
+       const username = /*[[${info.userName}]]*/
             // 연결끊기(해당 페이지에서는 사용하지 않음)
             /* document.querySelector('#disconn').addEventListener('click', disconnect); */
             // 전송하기
@@ -75,70 +78,80 @@
             }
         })
         
-        const websocket = new WebSocket('ws://localhost:8080/ws/chat');
+        //websocket 생성
+        const websocket = new WebSocket('ws://3.34.185.217:8080/ws/chat');
+        //선생님포트포워딩 : 58.72.151.126:8099을 192.168.0.87:8080 로
         //여기에는 일단 ip주소를 넣어줌
-        websocket.onmessage = onMessage;
-        websocket.onopen = onOpen;
-        websocket.onclose = onClose;
+        websocket.onmessage = onMessage; // 소켓이 메세지를 받을 때
+        websocket.onopen = welcomeMessage; // 소켓이 생성될 때
+        websocket.onclose = byeMessage; // 소켓이 닫힐 때
+        
+        
+        
+        //전송버튼 눌렀을 때
         function send() {
             let msg = document.getElementById('msg');
             if(msg.value.length==0){
-            	alert("입력을 해주세요");
-            	return false;
+               alert("입력을 해주세요");
+               return false;
             }
             
             console.log(username + ': ' + msg.value);
-            
-            
             websocket.send(username + ': ' + msg.value);
             msg.value = ''; // 메시지를 보낸 이후 화면에 아무것도 적혀있지 않게 하기 위해서
         }
         
-        function disconnect(){
-        	window.location.href="/register/first"
-        	 
-        	
-        }
+         
         // 채팅창에서 나갔을 때
-        function onClose(evt) {
-            var str = username + '님이 방을 나가셨습니다.';
+        function byeMessage(evt) {   
+           var str = username + '님이 퇴장하셨습니다.';
             websocket.send(str);
         }
+        
         // 채팅창에 들어왔을 때
-        function onOpen(evt) {
-            var str = username + '님이 입장하셨습니다.';
-            
-            websocket.send(str);
-           
+        function welcomeMessage(evt) {
+            var str = username + '님이 입장하셨습니다.';            
+            websocket.send(str);        
         }
+        
+        //메세지 받을 때
         function onMessage(msg) {
             var data = msg.data;
             // 데이터를 보낸 사람
+            console.log(data);
             var sessionId = null;
             var message = null;
-            var arr = data.split(/\:/);
+            var arr = data.split(/\:/);   //콜론을 기준으로 배열의 요소 분리
             // 현재 세션에 로그인 한 사람
             var cur_session = username;
+            //arr 은 메세지가 없이 입장, 퇴장일때는 크기가 2[유저명메세지, 인원수], 메세지가 있을때는 크기가3[유저명, 메세지, 인원수]
+            sessionId = arr[0].trim();   //배열[0]은 'ooo님이 입장하셨습니다.' 이 말자체를 나중에 현재 이름과 비교함. 즉, 이말이 나왔으면 틀린세션이됨
+            if(arr.length == 2){
+                pNum = arr[1];
+                 message = '';
+             }
+             else if (arr.length == 3){
+                pNum = arr[2];
+                 if(arr[1] === undefined) {   //배열[1]은 메세지 문자열
+                     message = '';
+                 } else {
+                     message = arr[1].trim();
+                 }
+             }
+
+            $("#totalNum").text(pNum+'명이 채팅에 참여하고 있습니다');
             
+
             
-            // 테스트 용도
-            for (var i = 0; i < arr.length; i++) {
-                console.log('arr[' + i + ']: ' + arr[i]);
-            }
-            console.log("cur_session: " + cur_session);
-            sessionId = arr[0].trim();
-            if(arr[1] === undefined) {
-                message = '';
-            } else {
-                message = arr[1].trim();
-            }
-            
-            console.log("sessionID: " + sessionId);
-            console.log("cur_session: " + cur_session);
+            console.log("sessionID: " + sessionId);      //글쓴사람
+            console.log("cur_session: " + cur_session);   //브라우저에 로그인된사람
             // 로그인 한 클라이언트
             if (sessionId == cur_session) {
+               console.log("글쓴유저와 로그인유저 같음");
+               $('#totalNum').val('그대로라구');
                 var str = "<div class='col-12'>";
-                str += "<div class='alert alert-primary style='word-break:break-all;''>";
+                str += "<div class='alert alert-primary' style='word-break:break-all;text-align:right;'>";
+                /* 내가 쓰는 글은 우측정렬되도록 style = 'text-align:right;' */
                     if(message === '') {
                     str += "<b>" + sessionId
                 } else {
@@ -150,6 +163,8 @@
             
             // 타 클라이언트 
             else {
+               console.log("글쓴유저와 로그인유저가 다름");
+                 //이제 사람수를 증가하니 상대방에서 글쓸때마다 올라가네 당연히.
                 var str = "<div class='col-12'>";
                 str += "<div class='alert alert-warning' style='word-break:break-all;'>";
                 if(message === '') {
@@ -160,7 +175,9 @@
                 str += "</div></div>";
                 document.querySelector('#msgArea').innerHTML += str;
             }
-        }
+        }   //end of onMessage()
+        
+        
     })
     /*<![CDATA[*/
 </script>

@@ -23,7 +23,7 @@ public class ChatRoom {
 	        ChatRoom room = new ChatRoom();
 	        room.roomId = UUID.randomUUID().toString();
 	        room.roomName = name;
-	        room.roomMaker=maker;
+	        room.roomMaker= maker; // 방 생성자
 	   
 	        LocalDateTime now=LocalDateTime.now();
 	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

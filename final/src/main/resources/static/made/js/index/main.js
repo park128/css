@@ -70,7 +70,7 @@ chatAni.addEventListener("click", function(){
 restAni.addEventListener("click", function() {
     buttonClose();
     setTimeout(function(){
-        window.location.href = '../html/resttime.html';
+        window.location.href = '/resttime/resttime';
     }, 2000)
 })
 

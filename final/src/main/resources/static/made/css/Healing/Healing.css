@@ -2,7 +2,7 @@
     font:lialic bold 1.5em/1em Georgin, serif; color: white;
 }
 
-.header-time{
+#header-time{
     top: 53px;
     left: 104px;
     position: fixed;
@@ -21,10 +21,10 @@
 
 .close{
     font-size: 10px;
-    background-color: #e96f92, #75517d;
-    color: white;
+    background-color: transparent;
     border: 2px solid #6a554e;
     border-radius: 50px;
+    color: white;
     display: inline-block;
     position: fixed;
     top: 39px;
@@ -39,7 +39,7 @@
 
 /*---------------------------------menu-------------------------------------  */
 .top_menu{
-    background-color: #6a2f2f;
+    background-color: transparent;
     display: inline-block;
     position: fixed;
     top: 50px;
@@ -200,7 +200,6 @@ table th {
 /* 테이블 영역에 있는 img만 적용시키는 방법 배우기 */
 
 img {
-    border-radius: 10px;
     width: 90px;
     height: 90px;
 }
